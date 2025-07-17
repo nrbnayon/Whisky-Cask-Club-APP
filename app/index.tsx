@@ -1,0 +1,43 @@
+import { View, Text, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
+import { Button } from "@/components/ui/Button";
+import Logo from "../assets/images/logo.png";
+
+export default function WelcomeScreen() {
+  return (
+    <SafeAreaView className='flex-1 bg-surface'>
+      <View className='flex-1 px-6 justify-center'>
+        {/* Logo Section */}
+        <View className='items-center mb-10'>
+          <View className='w-48 h-32 rounded-2xl items-center justify-center mb-4 relative'>
+            <Image source={Logo} className='w-24 h-24' resizeMode='contain' />
+          </View>
+
+          <Text className='text-gray-600 text-center text-base leading-6 px-4 font-manrope'>
+            Invest in rare casks, aged to perfection. Track, grow, and taste
+            your wealth.
+          </Text>
+        </View>
+
+        {/* Action Buttons */}
+        <View className='space-y-4'>
+          <Button
+            onPress={() => router.push("/(auth)/sign-in")}
+            className='w-full rounded-md py-5'
+          >
+            Sign In
+          </Button>
+
+          <Button
+            onPress={() => router.push("/(auth)/sign-up")}
+            variant='outline'
+            className='w-full rounded-md py-5'
+          >
+            Sign up
+          </Button>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
