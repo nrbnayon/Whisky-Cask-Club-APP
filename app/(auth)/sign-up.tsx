@@ -10,13 +10,13 @@ import { Input } from "@/components/ui/Input";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { signUpSchema, type SignUpFormData } from "@/utils/validationSchemas";
 import { showToast } from "@/utils/toast";
-// import { useAppStore } from "@/store/useAppStore";
+import { useAppStore } from "@/store/useAppStore";
 
 export default function SignUpScreen() {
   const [showPassword] = useState(false);
   const [showConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  //   const { setUser } = useAppStore();
+  const { setUser } = useAppStore();
 
   const {
     control,
@@ -44,14 +44,14 @@ export default function SignUpScreen() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Mock successful registration
-      //   setUser({
-      //     id: "1",
-      //     name: data.name,
-      //     email: data.email,
-      //   });
+      setUser({
+        id: "1",
+        name: data.name,
+        email: data.email,
+      });
 
       showToast("success", "Account Created!", "Welcome to Whisky Cask Club.");
-      router.replace("/(main)");
+      router.replace("/(tabs)" as any);
     } catch (error) {
       console.error("Registration failed:", error);
       showToast("error", "Registration Failed", "Please try again later.");

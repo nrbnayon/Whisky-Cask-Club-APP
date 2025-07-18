@@ -13,13 +13,12 @@ import { showToast } from "@/utils/toast";
 // Import SVG icons as components
 import AppleIcon from "@/assets/images/apple.svg";
 import GoogleIcon from "@/assets/images/google.svg";
-
-// import { useAppStore } from "@/store/useAppStore";
+import { useAppStore } from "@/store/useAppStore";
 
 export default function SignInScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword] = useState(false);
-  // const { setUser } = useAppStore();
+  const { setUser } = useAppStore();
 
   const {
     control,
@@ -40,14 +39,14 @@ export default function SignInScreen() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Mock user data
-      // setUser({
-      //   id: "1",
-      //   name: "John Doe",
-      //   email: data.email,
-      // });
+      setUser({
+        id: "1",
+        name: "John Doe",
+        email: data.email,
+      });
 
       showToast("success", "Welcome back!", "Successfully signed in.");
-      router.replace("/(main)");
+      router.replace("/(tabs)" as any);
     } catch (error) {
       console.error("Sign In Failed:", error);
       showToast("error", "Sign In Failed", "Please check your credentials.");
