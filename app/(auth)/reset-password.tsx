@@ -1,0 +1,142 @@
+import { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ChevronLeft } from "lucide-react-native";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { SuccessModal } from "@/components/SuccessModal";
+import {
+  resetPasswordSchema,
+  type ResetPasswordFormData,
+} from "@/utils/validationSchemas";
+import { showToast } from "@/utils/toast";
+
+export default function ResetPasswordScreen() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ResetPasswordFormData>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: {
+      code: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data: ResetPasswordFormData) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      setShowSuccessModal(true);
+      showToast(
+        "success",
+        "Password Reset",
+        "Your password has been reset successfully."
+      );
+    } catch (error) {
+      showToast("error", "Reset Failed", "Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSuccessModalClose = () => {
+    setShowSuccessModal(false);
+    router.replace("/(auth)/sign-in");
+  };
+
+  return (
+    <SafeAreaView className="flex-1 bg-surface">
+      <View className="flex-1 px-6">
+        {/* Header */}
+        <View className="flex-row items-center pt-4 pb-8">
+          <TouchableOpacity onPress={() => router.back()} className="mr-4">
+            <ChevronLeft size={24} color="#1F2937" />
+          </TouchableOpacity>
+          <Text className="text-primary-dark text-xl font-semibold font-manrope">
+            Reset Password
+          </Text>
+        </View>
+
+        {/* Content */}
+        <View className="flex-1 justify-center">
+          <Text className="text-primary-dark text-base leading-6 mb-8 font-manrope">
+            Code has been sent to infogma@gmail.com
+          </Text>
+
+          {/* Code Input */}
+          <View className="flex-row justify-between mb-6">
+            {[1, 2, 3, 4].map((index) => (
+              <View
+                key={index}
+                className="w-16 h-16 border border-gray-300 rounded-lg items-center justify-center"
+              >
+                <Text className="text-2xl font-bold text-gray-800 font-manrope">
+                  5
+                </Text>
+              </View>
+            ))}
+          </View>
+
+          <Text className="text-center text-gray-500 mb-8 font-manrope">
+            Resend Code in <Text className="text-primary">53 s</Text>
+          </Text>
+
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label="New Password"
+                placeholder="Enter new password"
+                value={value}
+                onChangeText={onChange}
+                secureTextEntry
+                error={errors.password?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="confirmPassword"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                label="Confirm Password"
+                placeholder="Confirm new password"
+                value={value}
+                onChangeText={onChange}
+                secureTextEntry
+                error={errors.confirmPassword?.message}
+              />
+            )}
+          />
+
+          <Button
+            onPress={handleSubmit(onSubmit)}
+            loading={isLoading}
+            className="w-full mt-8"
+          >
+            Verify
+          </Button>
+        </View>
+      </View>
+
+      <SuccessModal
+        visible={showSuccessModal}
+        title="Your password has been reset successfully."
+        onClose={handleSuccessModalClose}
+      />
+    </SafeAreaView>
+  );
+}

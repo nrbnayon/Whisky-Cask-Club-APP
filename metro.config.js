@@ -14,17 +14,28 @@ config.resolver.sourceExts = [
   "web.jsx",
   "web.ts",
   "web.tsx",
+  "svg", // Add SVG support
 ];
 
-config.resolver.extraNodeModules = {
-  "import.meta": { url: "" }, 
+// Configure SVG transformer
+config.transformer = {
+  ...config.transformer,
+  babelTransformerPath: require.resolve("react-native-svg-transformer"),
 };
 
+// Remove SVG from asset extensions and add it to source extensions
+config.resolver.assetExts = config.resolver.assetExts.filter(
+  (ext) => ext !== "svg"
+);
 config.resolver.assetExts = [
   ...config.resolver.assetExts,
   "ttf",
   "woff",
   "woff2",
 ];
+
+config.resolver.extraNodeModules = {
+  "import.meta": { url: "" },
+};
 
 module.exports = withNativeWind(config, { input: "./global.css" });

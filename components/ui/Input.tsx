@@ -20,6 +20,7 @@ interface InputProps {
   autoCapitalize?: "none" | "sentences" | "words" | "characters";
   error?: string;
   className?: string;
+  labelClassName?: string; // Added labelClassName prop
 }
 
 export function Input({
@@ -32,6 +33,7 @@ export function Input({
   autoCapitalize = "sentences",
   error,
   className,
+  labelClassName, // Added labelClassName prop
 }: InputProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -43,14 +45,19 @@ export function Input({
   return (
     <View className={clsx("mb-4", className)}>
       {label && (
-        <Text className='text-primary-dark font-manrope font-medium mb-2'>
+        <Text
+          className={clsx(
+            "text-black font-semibold mb-2",
+            labelClassName // Use labelClassName if provided, otherwise use default
+          )}
+        >
           {label}
         </Text>
       )}
-      <View className='relative'>
+      <View className="relative">
         {/* Shadow container */}
         <View
-          className='w-full'
+          className="w-full"
           style={[
             styles.inputContainer,
             isFocused ? getFocusedShadow() : getCardShadow("sm"),
@@ -58,7 +65,7 @@ export function Input({
               borderColor: error
                 ? "#EF4444" // error color
                 : isFocused
-                  ? "#3B82F6" // primary color
+                  ? "#b8860b" // primary color
                   : "#D1D5DB", // gray-300
             },
           ]}
@@ -67,7 +74,7 @@ export function Input({
             value={value}
             onChangeText={onChangeText}
             placeholder={placeholder}
-            placeholderTextColor='#9CA3AF'
+            placeholderTextColor="#9CA3AF"
             secureTextEntry={secureTextEntry && !showPassword}
             keyboardType={keyboardType}
             autoCapitalize={autoCapitalize}
@@ -83,18 +90,18 @@ export function Input({
         {secureTextEntry && (
           <TouchableOpacity
             onPress={handleTogglePassword}
-            className='absolute right-3 top-3'
+            className="absolute right-3 top-3"
           >
             {showPassword ? (
-              <EyeOff size={20} color='#9CA3AF' />
+              <EyeOff size={20} color="#9CA3AF" />
             ) : (
-              <Eye size={20} color='#9CA3AF' />
+              <Eye size={20} color="#9CA3AF" />
             )}
           </TouchableOpacity>
         )}
       </View>
       {error && (
-        <Text className='text-error font-manrope text-sm mt-1'>{error}</Text>
+        <Text className="text-error font-manrope text-sm mt-1">{error}</Text>
       )}
     </View>
   );
