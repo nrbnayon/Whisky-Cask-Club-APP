@@ -66,7 +66,7 @@ export default function SignUpScreen() {
     <SafeAreaView className="flex-1 bg-surface">
       <ScrollView className="flex-1 px-6" showsVerticalScrollIndicator={false}>
         <View className="py-6">
-          <Text className="text-black text-3xl font-bold mb-8">
+          <Text className="text-black text-3xl font-semibold mb-8">
             Create a new{"\n"}Account
           </Text>
 
@@ -162,7 +162,8 @@ export default function SignUpScreen() {
               onPress={handleSubmit(onSubmit)}
               loading={isLoading}
               disabled={!agreeToPrivacyPolicy}
-              className="w-full bg-primary mt-8"
+              size="lg"
+              className="w-full bg-primary mt-6 "
             >
               Sign Up
             </Button>

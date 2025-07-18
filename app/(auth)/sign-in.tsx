@@ -18,7 +18,7 @@ import GoogleIcon from "@/assets/images/google.svg";
 
 export default function SignInScreen() {
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword,] = useState(false);
+  const [showPassword] = useState(false);
   // const { setUser } = useAppStore();
 
   const {
@@ -61,7 +61,7 @@ export default function SignInScreen() {
       <View className="flex-1 px-6">
         {/* Form */}
         <View className="flex-1 justify-center">
-          <Text className="text-black text-3xl font-bold mb-8">
+          <Text className="text-black text-3xl font-semibold mb-8">
             Sign In Now
           </Text>
           <Controller
@@ -69,9 +69,7 @@ export default function SignInScreen() {
             name="email"
             render={({ field: { onChange, value } }) => (
               <View className="mb-4">
-                <Text className="text-black-700 font-manrope font-semibold mb-2">
-                  Email
-                </Text>
+                <Text className="text-black font-semibold mb-2">Email</Text>
                 <Input
                   placeholder="example@gmail.com"
                   value={value}
@@ -102,7 +100,7 @@ export default function SignInScreen() {
 
           <TouchableOpacity
             onPress={() => router.push("/(auth)/forgot-password")}
-            className="self-end mb-8"
+            className="self-end mb-6"
           >
             <Text className="text-primary font-manrope font-medium">
               Forgot password?
@@ -112,7 +110,8 @@ export default function SignInScreen() {
           <Button
             onPress={handleSubmit(onSubmit)}
             loading={isLoading}
-            className="w-full mb-6 py-5"
+            className="w-full mb-5"
+            size="lg"
           >
             Sign In
           </Button>

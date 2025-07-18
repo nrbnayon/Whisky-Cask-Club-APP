@@ -22,7 +22,7 @@ export function Checkbox({
       <TouchableOpacity onPress={onPress} className="flex-row items-center">
         <View
           className={cn(
-            "w-5 h-5 border-2 rounded mr-3 items-center justify-center",
+            "w-5 h-5 border-2 rounded-[6px] mr-3 items-center justify-center border-primary",
             checked ? "bg-primary border-primary" : "border-input bg-card"
           )}
         >

@@ -25,7 +25,8 @@ export default function WelcomeScreen() {
           <View className="">
             <Button
               onPress={() => router.push("/(auth)/sign-in")}
-              className="w-full rounded-md py-5"
+              className="w-full"
+              size="lg"
             >
               Sign In
             </Button>
@@ -33,7 +34,8 @@ export default function WelcomeScreen() {
             <Button
               onPress={() => router.push("/(auth)/sign-up")}
               variant="outline"
-              className="w-full rounded-md py-5 mt-4"
+              className="w-full mt-4"
+              size="lg"
             >
               Sign up
             </Button>

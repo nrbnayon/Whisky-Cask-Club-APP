@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  Text,
-  ActivityIndicator,
-} from "react-native";
+import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
 import { clsx } from "clsx";
 import { getCardShadow } from "@/utils/shadows";
 
@@ -21,13 +17,13 @@ export function Button({
   children,
   onPress,
   variant = "primary",
-  size = "md",
+  size = "lg",
   loading = false,
   disabled = false,
   className,
 }: ButtonProps) {
   const baseStyles =
-    "flex-row items-center justify-center rounded-lg font-medium";
+    "flex-row items-center justify-center rounded-[8px] font-medium";
 
   const variantStyles = {
     primary: "bg-primary",
@@ -74,12 +70,12 @@ export function Button({
           color={
             variant === "outline" || variant === "ghost" ? "#b8860b" : "#ffffff"
           }
-          size='small'
+          size="small"
         />
       ) : (
         <Text
           className={clsx(
-            "font-manrope font-semibold",
+            "text-md font-manrope font-semibold",
             textColorStyles[variant]
           )}
         >
