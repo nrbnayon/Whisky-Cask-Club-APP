@@ -1,4 +1,4 @@
-// app\(tabs)\_layout.tsx
+// app\(main)\_layout.tsx
 import { Tabs } from "expo-router";
 import {
   Chrome as Home,

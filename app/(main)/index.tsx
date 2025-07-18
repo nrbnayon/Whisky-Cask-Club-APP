@@ -1,4 +1,4 @@
-// app\(tabs)\index.tsx
+// app\(main)\index.tsx
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
@@ -26,7 +26,7 @@ export default function HomeScreen() {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => router.push("/(tabs)/notifications" as any)}
+              onPress={() => router.push("/(main)/notifications" as any)}
               className="w-12 h-12 bg-white rounded-full items-center justify-center"
               style={{
                 shadowColor: "#000",

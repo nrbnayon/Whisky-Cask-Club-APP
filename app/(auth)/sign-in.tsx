@@ -46,7 +46,7 @@ export default function SignInScreen() {
       });
 
       showToast("success", "Welcome back!", "Successfully signed in.");
-      router.replace("/(tabs)" as any);
+      router.replace("/(main)" as any);
     } catch (error) {
       console.error("Sign In Failed:", error);
       showToast("error", "Sign In Failed", "Please check your credentials.");

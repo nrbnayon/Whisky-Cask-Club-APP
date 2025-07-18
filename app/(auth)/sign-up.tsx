@@ -51,7 +51,7 @@ export default function SignUpScreen() {
       });
 
       showToast("success", "Account Created!", "Welcome to Whisky Cask Club.");
-      router.replace("/(tabs)" as any);
+      router.replace("/(main)" as any);
     } catch (error) {
       console.error("Registration failed:", error);
       showToast("error", "Registration Failed", "Please try again later.");

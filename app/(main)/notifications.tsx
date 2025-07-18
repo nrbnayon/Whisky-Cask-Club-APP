@@ -1,4 +1,4 @@
-// app\(tabs)\notifications.tsx
+// app\(main)\notifications.tsx
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
@@ -38,6 +38,7 @@ export default function NotificationsScreen() {
           <TouchableOpacity onPress={() => router.back()} className="mr-4">
             <ChevronLeft size={24} color="#1F2937" />
           </TouchableOpacity>
+
           <Text className="text-gray-800 text-xl font-semibold font-manrope">
             Notification
           </Text>
