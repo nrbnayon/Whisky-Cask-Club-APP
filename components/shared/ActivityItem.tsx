@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { getCardShadow } from "@/utils/shadows";
+// import { getCardShadow } from "@/utils/shadows";
 
 interface ActivityItemProps {
   title: string;
@@ -17,51 +17,72 @@ export function ActivityItem({
   type,
   badge,
 }: ActivityItemProps) {
-  const getTypeColor = () => {
+  const getIconColor = () => {
     switch (type) {
       case "gain":
-        return "border-l-green-500";
+        return "bg-green-500";
       case "offer":
-        return "border-l-orange-500";
+        return "bg-[#B8860B]";
       case "reward":
-        return "border-l-pink-500";
+        return "bg-[#E47356]";
       default:
-        return "border-l-gray-300";
+        return "bg-gray-500";
     }
   };
 
-  const getBadgeColor = () => {
+  const getBadgeStyles = () => {
     switch (type) {
       case "gain":
-        return "bg-green-100 text-green-600";
+        return {
+          container:
+            "bg-green-50 border border-green-200 px-3 py-1 rounded-full",
+          text: "text-green-600 text-xs font-medium",
+        };
       case "offer":
-        return "bg-orange-100 text-orange-600";
+        return {
+          container:
+            "bg-orange-50 border border-orange-200 px-3 py-1 rounded-full",
+          text: "text-orange-600 text-xs font-medium",
+        };
       case "reward":
-        return "bg-pink-100 text-pink-600";
+        return {
+          container: "bg-red-50 border border-red-200 px-3 py-1 rounded-full",
+          text: "text-red-600 text-xs font-medium",
+        };
       default:
-        return "bg-gray-100 text-gray-600";
+        return {
+          container: "bg-gray-50 border border-gray-200 px-3 py-1 rounded-full",
+          text: "text-gray-600 text-xs font-medium",
+        };
     }
   };
+
+  const badgeStyles = getBadgeStyles();
 
   return (
     <View
-      className={`bg-white rounded-xl p-4 mb-3 border-l-4 ${getTypeColor()}`}
-      style={getCardShadow("sm")}
+      className="bg-white rounded-lg p-4 mb-3 border border-[#DBDADA]"
+      // style={getCardShadow("sm")}
     >
       <View className="flex-row items-center justify-between">
-        <View className="flex-1">
-          <Text className="text-base font-medium text-gray-800 mb-1 font-manrope">
-            {title}
-          </Text>
-          <Text className="text-sm text-gray-600 font-manrope">{subtitle}</Text>
+        <View className="flex-row items-center flex-1">
+          {/* Colored dot indicator */}
+          <View className={`w-3 h-3 rounded-full mr-3 ${getIconColor()}`} />
+
+          <View className="flex-1">
+            <Text className="text-base font-normal text-gray-900 mb-1.5">
+              {title}
+            </Text>
+            <Text className="text-sm text-gray-500">{time}</Text>
+          </View>
         </View>
+
         {badge && (
-          <View className={`px-2 py-1 rounded-full ${getBadgeColor()}`}>
-            <Text className="text-xs font-medium font-manrope">{badge}</Text>
+          <View className={badgeStyles.container}>
+            <Text className={badgeStyles.text}>{badge}</Text>
           </View>
         )}
       </View>
-      <Text className="text-xs text-gray-400 mt-2 font-manrope">{time}</Text>
     </View>
   );
 }

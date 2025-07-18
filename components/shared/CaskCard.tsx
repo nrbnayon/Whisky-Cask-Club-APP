@@ -1,9 +1,7 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
-import { MapPin, Eye } from "lucide-react-native";
-import { Button } from "../ui/Button";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import { Eye, MapPin } from "lucide-react-native";
 import { getCardShadow } from "@/utils/shadows";
-import { Card } from "../ui/Card";
 
 interface CaskCardProps {
   id: string;
@@ -17,6 +15,8 @@ interface CaskCardProps {
   gainPercentage: string;
   status: "Ready" | "Maturing";
   image: string;
+  borderColor?: string;
+  detailsButtonActive?: boolean;
   onViewDetails?: () => void;
 }
 
@@ -31,49 +31,54 @@ export function CaskCard({
   gainPercentage,
   status,
   image,
+  borderColor = "#D7FBFF",
+  detailsButtonActive,
   onViewDetails,
 }: CaskCardProps) {
   return (
-    <Card className="mb-4" shadowLevel="md">
-      <View className="flex-row">
+    <View
+      className="rounded-xl p-4 mb-4"
+      style={[
+        {
+          backgroundColor: "#FFFFFF",
+          borderWidth: 1,
+          borderColor: `${borderColor}`,
+        },
+        getCardShadow("sm"),
+      ]}
+    >
+      <View className="flex-row items-start">
         <Image
           source={{ uri: image }}
-          className="w-20 h-20 rounded-lg"
+          className="w-20 h-20 object-cover rounded-lg mr-3"
           resizeMode="cover"
-          style={getCardShadow("sm")}
         />
 
-        <View className="flex-1 ml-4">
+        <View className="flex-1">
           <View className="flex-row items-center justify-between mb-1">
-            <Text className="text-lg font-semibold text-gray-800 font-manrope">
-              {name}
-            </Text>
-            <View className="bg-gray-100 px-2 py-1 rounded-full">
-              <Text className="text-xs text-gray-600 font-manrope">
-                {gainPercentage}
-              </Text>
+            <Text className="text-lg font-semibold text-gray-800">{name}</Text>
+            <View className="bg-green-50 rounded-full border border-green-300 px-2 py-1 ">
+              <Text className="text-xs text-green-600">{gainPercentage}</Text>
             </View>
           </View>
 
-          <Text className="text-sm text-gray-600 mb-1 font-manrope">
-            Year: {year}
-          </Text>
-          <Text className="text-sm text-gray-600 mb-2 font-manrope">
+          <Text className="text-sm text-gray-600 mb-1">Year: {year}</Text>
+          <Text className="text-sm text-gray-600 mb-2">
             Volume: {volume} - ABV: {abv}
           </Text>
 
           <View className="flex-row items-center mb-3">
             <MapPin size={12} color="#9CA3AF" />
-            <Text className="text-xs text-gray-500 ml-1 font-manrope">
-              {location}
-            </Text>
+            <Text className="text-xs text-gray-500 ml-1">{location}</Text>
             <View
-              className={`ml-auto px-2 py-1 rounded-full ${
-                status === "Ready" ? "bg-green-100" : "bg-orange-100"
+              className={`ml-auto px-2 py-1 rounded-full border ${
+                status === "Ready"
+                  ? "border-green-300 bg-green-50"
+                  : "border-orange-300 bg-orange-100"
               }`}
             >
               <Text
-                className={`text-xs font-manrope ${
+                className={`text-xs ${
                   status === "Ready" ? "text-green-600" : "text-orange-600"
                 }`}
               >
@@ -84,31 +89,35 @@ export function CaskCard({
 
           <View className="flex-row justify-between items-center mb-3">
             <View>
-              <Text className="text-xs text-gray-500 font-manrope">
-                Estimated Value
-              </Text>
-              <Text className="text-base font-semibold text-gray-800 font-manrope">
+              <Text className="text-xs text-gray-500">Estimated Value</Text>
+              <Text className="text-base font-semibold text-gray-800">
                 {estimatedValue}
               </Text>
             </View>
             <View className="items-end">
-              <Text className="text-xs text-gray-500 font-manrope">Gain</Text>
-              <Text className="text-base font-semibold text-green-600 font-manrope">
+              <Text className="text-xs text-gray-500">Gain</Text>
+              <Text className="text-base font-semibold text-green-600">
                 {gain}
               </Text>
             </View>
           </View>
 
-          <Button onPress={onViewDetails} className="w-full" size="sm">
-            <View className="flex-row items-center justify-center">
-              <Eye size={16} color="white" />
-              <Text className="text-white font-semibold ml-2 font-manrope">
-                View Details
-              </Text>
-            </View>
-          </Button>
+          {detailsButtonActive && (
+            <TouchableOpacity
+              onPress={onViewDetails}
+              className="w-full py-3 rounded-lg items-center justify-center"
+              style={{ backgroundColor: "#D4AF37" }}
+            >
+              <View className="flex-row items-center">
+                <Eye size={16} color="white" />
+                <Text className="text-white font-semibold ml-2">
+                  View Details
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
-    </Card>
+    </View>
   );
 }

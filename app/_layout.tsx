@@ -35,25 +35,26 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-   useEffect(() => {
-     if (loaded) {
-       SplashScreen.hideAsync();
-     }
-   }, [loaded]);
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
 
-   if (!loaded) {
-     return null;
-   }
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <QueryClientProvider client={queryClient}>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <StatusBar style='auto' />
+          <StatusBar style="auto" />
           <Stack>
-            <Stack.Screen name='index' options={{ headerShown: false }} />
-            <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-            <Stack.Screen name='(main)' options={{ headerShown: false }} />
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="(main)" options={{ headerShown: false }} />
+            <Stack.Screen name="(screen)" options={{ headerShown: false }} />
             {/* <Stack.Screen name="modal" options={{ presentation: "modal" }} /> */}
           </Stack>
           <Toast />
@@ -62,4 +63,3 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
-
