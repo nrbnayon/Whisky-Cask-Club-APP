@@ -34,7 +34,7 @@ export default function NotificationsScreen() {
     <SafeAreaView className="flex-1 bg-surface">
       <View className="flex-1">
         {/* Header */}
-        <View className="flex-row items-center px-6 py-4 border-b border-gray-100">
+        <View className="flex-row items-center px-5 py-4 border-b border-gray-100">
           <TouchableOpacity onPress={() => router.back()} className="mr-4">
             <ChevronLeft size={24} color="#1F2937" />
           </TouchableOpacity>
@@ -47,7 +47,7 @@ export default function NotificationsScreen() {
         {/* Notifications List */}
         <ScrollView
           showsVerticalScrollIndicator={false}
-          className="flex-1 px-6 py-4"
+          className="flex-1 px-5 py-4"
         >
           {notifications.map((notification) => {
             const iconConfig = getNotificationIcon(notification.type);

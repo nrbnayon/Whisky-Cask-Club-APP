@@ -2,11 +2,14 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
-import { Bell, TrendingUp, Package, DollarSign } from "lucide-react-native";
+import { Bell, TrendingUp } from "lucide-react-native";
 import { useAppStore } from "@/store/useAppStore";
 import { StatCard } from "@/components/shared/StatCard";
 import { CaskCard } from "@/components/shared/CaskCard";
 import { ActivityItem } from "@/components/shared/ActivityItem";
+
+import CaskBottleIcon from "@/assets/images/cask-bottle.png";
+import MoneyBagIcon from "@/assets/images/money-bag.png";
 
 export default function HomeScreen() {
   const { user, casks, activities, portfolioStats } = useAppStore();
@@ -14,27 +17,18 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="px-6 py-4">
+        <View className="px-5 py-4">
           {/* Header */}
           <View className="flex-row items-center justify-between mb-6">
             <View>
-              <Text className="text-gray-600 text-base font-manrope">
-                Good Morning
-              </Text>
-              <Text className="text-gray-800 text-2xl font-bold font-manrope">
+              <Text className="text-gray-700 text-md">Good Morning</Text>
+              <Text className="text-gray-800 text-2xl font-semibold">
                 {user?.name || "James Wilson"}
               </Text>
             </View>
             <TouchableOpacity
               onPress={() => router.push("/(main)/notifications" as any)}
-              className="w-12 h-12 bg-white rounded-full items-center justify-center"
-              style={{
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 4,
-                elevation: 3,
-              }}
+              className="w-12 h-12 bg-[#F0F0F0] rounded-full items-center justify-center"
             >
               <Bell size={24} color="#374151" />
             </TouchableOpacity>
@@ -46,28 +40,33 @@ export default function HomeScreen() {
           </Text>
 
           {/* Stats */}
-          <View className="flex-row mb-6">
+          <View className="flex-row mb-6 space-x-3">
             <StatCard
-              icon={Package}
-              iconColor="#B8860B"
-              iconBgColor="bg-yellow-100"
+              iconImage={CaskBottleIcon}
+              iconBgColor="#FEF3C7"
+              cardBgColor="#FFFBEB"
+              borderColor="#FBEFD0"
               title="Total Casks"
               value={portfolioStats.totalCasks.toString()}
             />
             <StatCard
-              icon={DollarSign}
-              iconColor="#3B82F6"
-              iconBgColor="bg-blue-100"
+              icon={TrendingUp}
+              iconColor="#0891B2"
+              iconBgColor="#CFFAFE"
+              cardBgColor="#F0F9FF"
+              borderColor="#BAE6FD"
               title="Total Value"
               value={portfolioStats.totalValue}
             />
             <StatCard
-              icon={TrendingUp}
-              iconColor="#10B981"
-              iconBgColor="bg-green-100"
+              iconImage={MoneyBagIcon}
+              iconColor="#059669"
+              iconBgColor="#CDFFDF"
+              cardBgColor="#EFFAF3"
+              borderColor="#CDFFDF"
               title="Lifetime Gain"
               value={portfolioStats.lifetimeGain}
-              valueColor="text-green-600"
+              valueColor="text-[#22C55E]"
             />
           </View>
 

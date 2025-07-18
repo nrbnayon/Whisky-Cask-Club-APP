@@ -7,7 +7,7 @@ import Logo from "../assets/images/logo.png";
 export default function WelcomeScreen() {
   return (
     <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 px-6 justify-center">
+      <View className="flex-1 px-5 justify-center">
         {/* Logo Section */}
         <View className="items-center mb-10">
           <View className="rounded-2xl items-center justify-center mb-4 relative">

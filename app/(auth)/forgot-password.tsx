@@ -51,7 +51,7 @@ export default function ForgotPasswordScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 px-6">
+      <View className="flex-1 px-5">
         {/* Header */}
         <View className="flex-row items-center pt-4 pb-8">
           <TouchableOpacity onPress={() => router.back()} className="mr-2">

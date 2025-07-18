@@ -17,7 +17,7 @@ export function SuccessModal({ visible, title, onClose }: SuccessModalProps) {
       animationType="fade"
       onRequestClose={onClose}
     >
-      <View className="flex-1 bg-overlay justify-center items-center px-6">
+      <View className="flex-1 bg-overlay justify-center items-center px-5">
         <View
           className="bg-card rounded-3xl p-12 w-full max-w-sm"
           style={shadowStyles.modal}
