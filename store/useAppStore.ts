@@ -1,9 +1,8 @@
-
 // store/useAppStore.ts
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Platform } from "react-native"; // UNCOMMENT THIS LINE
+import { Platform } from "react-native";
 
 // Custom storage for web compatibility
 const storage = {
@@ -41,6 +40,26 @@ const storage = {
   },
 };
 
+interface ChartDataPoint {
+  month: string;
+  value: number;
+}
+
+interface ForecastData {
+  year: string;
+  value: string;
+}
+
+interface CaskDetails {
+  bottle?: string;
+  packaging?: string;
+  volume: string;
+  abv?: string;
+  years?: string;
+  warehouseLocation?: string;
+  certificates?: string;
+}
+
 interface Cask {
   id: string;
   name: string;
@@ -51,8 +70,15 @@ interface Cask {
   estimatedValue: string;
   gain: string;
   gainPercentage: string;
+  totalGain: string;
   status: "Ready" | "Maturing";
   image: string;
+  // New dynamic fields
+  details: CaskDetails;
+  appreciationData: ChartDataPoint[];
+  currentAppreciation: string;
+  futureForecasts: ForecastData[];
+  projectedAppreciation: string;
 }
 
 interface Activity {
@@ -102,7 +128,7 @@ interface AppState {
   logout: () => void;
 }
 
-// DEFINE YOUR 10 CASKS AS A CONSTANT
+// DEFINE YOUR 10 CASKS AS A CONSTANT WITH FULL DYNAMIC DATA
 const DEFAULT_CASKS: Cask[] = [
   {
     id: "1",
@@ -114,8 +140,32 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$15,500",
     gain: "+$1,500",
     gainPercentage: "+9.3%",
+    totalGain: "+120%",
     status: "Ready",
-    image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg", // whiskey bottles
+    image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
+    details: {
+      volume: "500 Litres",
+      abv: "63.2%",
+      years: "25 Years",
+      warehouseLocation: "New York, USA",
+    },
+    appreciationData: [
+      { month: "Jan", value: 4000 },
+      { month: "Feb", value: 8000 },
+      { month: "Mar", value: 12000 },
+      { month: "Apr", value: 10000 },
+      { month: "May", value: 14000 },
+      { month: "Jun", value: 16000 },
+    ],
+    currentAppreciation: "29.2%",
+    futureForecasts: [
+      { year: "2025", value: "$16,800" },
+      { year: "2026", value: "$18,200" },
+      { year: "2027", value: "$19,800" },
+      { year: "2028", value: "$21,500" },
+      { year: "2029", value: "$23,400" },
+    ],
+    projectedAppreciation: "+38.7%",
   },
   {
     id: "2",
@@ -127,8 +177,30 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$15,500",
     gain: "+$1,500",
     gainPercentage: "+2.3%",
+    totalGain: "+85%",
     status: "Maturing",
-    image: "https://images.pexels.com/photos/3649262/pexels-photo-3649262.jpeg", // whiskey barrel
+    image: "https://images.pexels.com/photos/3649262/pexels-photo-3649262.jpeg",
+    details: {
+      bottle: "6 Bottle",
+      packaging: "Premium Gift Box",
+      volume: "700ml each",
+      certificates: "Authenticity Included",
+    },
+    appreciationData: [
+      { month: "Jan", value: 5000 },
+      { month: "Feb", value: 7500 },
+      { month: "Mar", value: 9000 },
+      { month: "Apr", value: 11000 },
+      { month: "May", value: 13500 },
+      { month: "Jun", value: 15500 },
+    ],
+    currentAppreciation: "24.8%",
+    futureForecasts: [
+      { year: "2025", value: "$16,200" },
+      { year: "2026", value: "$17,100" },
+      { year: "2027", value: "$18,000" },
+    ],
+    projectedAppreciation: "+32.1%",
   },
   {
     id: "3",
@@ -140,8 +212,31 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$12,800",
     gain: "+$1,200",
     gainPercentage: "+10.3%",
+    totalGain: "+95%",
     status: "Ready",
-    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg", // scotch in glass
+    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    details: {
+      volume: "450 Litres",
+      abv: "61.8%",
+      years: "23 Years",
+      warehouseLocation: "Islay, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 3500 },
+      { month: "Feb", value: 6000 },
+      { month: "Mar", value: 8500 },
+      { month: "Apr", value: 10200 },
+      { month: "May", value: 11800 },
+      { month: "Jun", value: 12800 },
+    ],
+    currentAppreciation: "31.5%",
+    futureForecasts: [
+      { year: "2025", value: "$13,500" },
+      { year: "2026", value: "$14,300" },
+      { year: "2027", value: "$15,200" },
+      { year: "2028", value: "$16,100" },
+    ],
+    projectedAppreciation: "+41.2%",
   },
   {
     id: "4",
@@ -153,8 +248,33 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$10,000",
     gain: "+$900",
     gainPercentage: "+9.0%",
+    totalGain: "+78%",
     status: "Maturing",
-    image: "https://images.pexels.com/photos/279303/pexels-photo-279303.jpeg", // whiskey pouring
+    image: "https://images.pexels.com/photos/279303/pexels-photo-279303.jpeg",
+    details: {
+      volume: "600 Litres",
+      abv: "60.1%",
+      years: "19 Years",
+      warehouseLocation: "Speyside, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 2800 },
+      { month: "Feb", value: 4200 },
+      { month: "Mar", value: 6000 },
+      { month: "Apr", value: 7500 },
+      { month: "May", value: 8800 },
+      { month: "Jun", value: 10000 },
+    ],
+    currentAppreciation: "26.7%",
+    futureForecasts: [
+      { year: "2025", value: "$10,600" },
+      { year: "2026", value: "$11,300" },
+      { year: "2027", value: "$12,000" },
+      { year: "2028", value: "$12,800" },
+      { year: "2029", value: "$13,600" },
+      { year: "2030", value: "$14,500" },
+    ],
+    projectedAppreciation: "+36.0%",
   },
   {
     id: "5",
@@ -166,8 +286,30 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$13,200",
     gain: "+$1,100",
     gainPercentage: "+8.3%",
+    totalGain: "+92%",
     status: "Ready",
-    image: "https://images.pexels.com/photos/1283220/pexels-photo-1283220.jpeg", // whiskey glass
+    image: "https://images.pexels.com/photos/1283220/pexels-photo-1283220.jpeg",
+    details: {
+      volume: "550 Litres",
+      abv: "62.0%",
+      years: "21 Years",
+      warehouseLocation: "Dufftown, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 3200 },
+      { month: "Feb", value: 5800 },
+      { month: "Mar", value: 8100 },
+      { month: "Apr", value: 10500 },
+      { month: "May", value: 11900 },
+      { month: "Jun", value: 13200 },
+    ],
+    currentAppreciation: "28.3%",
+    futureForecasts: [
+      { year: "2025", value: "$14,000" },
+      { year: "2026", value: "$14,900" },
+      { year: "2027", value: "$15,800" },
+    ],
+    projectedAppreciation: "+39.4%",
   },
   {
     id: "6",
@@ -179,8 +321,31 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$14,300",
     gain: "+$1,300",
     gainPercentage: "+9.1%",
+    totalGain: "+105%",
     status: "Maturing",
-    image: "https://images.pexels.com/photos/678111/pexels-photo-678111.jpeg", // bottle and glass
+    image: "https://images.pexels.com/photos/678111/pexels-photo-678111.jpeg",
+    details: {
+      volume: "480 Litres",
+      abv: "64.0%",
+      years: "24 Years",
+      warehouseLocation: "Orkney, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 4100 },
+      { month: "Feb", value: 6500 },
+      { month: "Mar", value: 8900 },
+      { month: "Apr", value: 11200 },
+      { month: "May", value: 12800 },
+      { month: "Jun", value: 14300 },
+    ],
+    currentAppreciation: "33.1%",
+    futureForecasts: [
+      { year: "2025", value: "$15,200" },
+      { year: "2026", value: "$16,200" },
+      { year: "2027", value: "$17,300" },
+      { year: "2028", value: "$18,500" },
+    ],
+    projectedAppreciation: "+42.8%",
   },
   {
     id: "7",
@@ -192,8 +357,32 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$11,900",
     gain: "+$800",
     gainPercentage: "+7.2%",
+    totalGain: "+88%",
     status: "Ready",
-    image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg", // whisky shelves
+    image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg",
+    details: {
+      volume: "500 Litres",
+      abv: "59.5%",
+      years: "27 Years",
+      warehouseLocation: "Speyside, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 3000 },
+      { month: "Feb", value: 5200 },
+      { month: "Mar", value: 7400 },
+      { month: "Apr", value: 9100 },
+      { month: "May", value: 10500 },
+      { month: "Jun", value: 11900 },
+    ],
+    currentAppreciation: "25.9%",
+    futureForecasts: [
+      { year: "2025", value: "$12,600" },
+      { year: "2026", value: "$13,400" },
+      { year: "2027", value: "$14,200" },
+      { year: "2028", value: "$15,100" },
+      { year: "2029", value: "$16,000" },
+    ],
+    projectedAppreciation: "+37.3%",
   },
   {
     id: "8",
@@ -205,8 +394,30 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$14,900",
     gain: "+$1,400",
     gainPercentage: "+10.4%",
+    totalGain: "+98%",
     status: "Maturing",
-    image: "https://images.pexels.com/photos/5946979/pexels-photo-5946979.jpeg", // whiskey on bar
+    image: "https://images.pexels.com/photos/5946979/pexels-photo-5946979.jpeg",
+    details: {
+      volume: "520 Litres",
+      abv: "65.3%",
+      years: "25 Years",
+      warehouseLocation: "Islay, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 4200 },
+      { month: "Feb", value: 6800 },
+      { month: "Mar", value: 9200 },
+      { month: "Apr", value: 11600 },
+      { month: "May", value: 13200 },
+      { month: "Jun", value: 14900 },
+    ],
+    currentAppreciation: "32.7%",
+    futureForecasts: [
+      { year: "2025", value: "$15,800" },
+      { year: "2026", value: "$16,800" },
+      { year: "2027", value: "$17,900" },
+    ],
+    projectedAppreciation: "+43.1%",
   },
   {
     id: "9",
@@ -218,8 +429,31 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$13,700",
     gain: "+$1,000",
     gainPercentage: "+7.9%",
+    totalGain: "+82%",
     status: "Ready",
-    image: "https://images.pexels.com/photos/1006960/pexels-photo-1006960.jpeg", // aged bottles
+    image: "https://images.pexels.com/photos/1006960/pexels-photo-1006960.jpeg",
+    details: {
+      volume: "470 Litres",
+      abv: "62.7%",
+      years: "22 Years",
+      warehouseLocation: "Highlands, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 3400 },
+      { month: "Feb", value: 5900 },
+      { month: "Mar", value: 8200 },
+      { month: "Apr", value: 10300 },
+      { month: "May", value: 12000 },
+      { month: "Jun", value: 13700 },
+    ],
+    currentAppreciation: "27.8%",
+    futureForecasts: [
+      { year: "2025", value: "$14,500" },
+      { year: "2026", value: "$15,400" },
+      { year: "2027", value: "$16,400" },
+      { year: "2028", value: "$17,500" },
+    ],
+    projectedAppreciation: "+40.1%",
   },
   {
     id: "10",
@@ -231,8 +465,33 @@ const DEFAULT_CASKS: Cask[] = [
     estimatedValue: "$12,500",
     gain: "+$950",
     gainPercentage: "+8.2%",
+    totalGain: "+76%",
     status: "Maturing",
-    image: "https://images.pexels.com/photos/1267318/pexels-photo-1267318.jpeg", // whisky collection
+    image: "https://images.pexels.com/photos/1267318/pexels-photo-1267318.jpeg",
+    details: {
+      volume: "490 Litres",
+      abv: "60.9%",
+      years: "20 Years",
+      warehouseLocation: "West Highlands, Scotland",
+    },
+    appreciationData: [
+      { month: "Jan", value: 2900 },
+      { month: "Feb", value: 4800 },
+      { month: "Mar", value: 6700 },
+      { month: "Apr", value: 8500 },
+      { month: "May", value: 10200 },
+      { month: "Jun", value: 12500 },
+    ],
+    currentAppreciation: "24.1%",
+    futureForecasts: [
+      { year: "2025", value: "$13,200" },
+      { year: "2026", value: "$14,000" },
+      { year: "2027", value: "$14,900" },
+      { year: "2028", value: "$15,800" },
+      { year: "2029", value: "$16,800" },
+      { year: "2030", value: "$17,900" },
+    ],
+    projectedAppreciation: "+34.4%",
   },
 ];
 
@@ -241,7 +500,7 @@ export const useAppStore = create<AppState>()(
     (set) => ({
       user: null,
       theme: "system",
-      casks: DEFAULT_CASKS, 
+      casks: DEFAULT_CASKS,
       activities: [
         {
           id: "1",
@@ -288,7 +547,8 @@ export const useAppStore = create<AppState>()(
         {
           id: "3",
           title: "Referral Reward Earned",
-          message: "Congratulations! You've earned £50 for referring Sarah Johnson",
+          message:
+            "Congratulations! You've earned £50 for referring Sarah Johnson",
           time: "7 day ago",
           type: "reward",
           read: false,
@@ -339,13 +599,17 @@ export const useAppStore = create<AppState>()(
     {
       name: "app-storage",
       storage: createJSONStorage(() => storage),
-      version: 2, // INCREMENT THIS TO FORCE RESET
+      version: 3, // INCREMENT THIS TO FORCE RESET
       // ADD MIGRATION LOGIC
       migrate: (persistedState: any, version: number) => {
-        console.log('Migrating from version:', version);
-        // If stored data doesn't have all casks, use default
-        if (!persistedState?.casks || persistedState.casks.length < 10) {
-          console.log('Restoring default casks');
+        console.log("Migrating from version:", version);
+        // If stored data doesn't have all casks with new structure, use default
+        if (
+          !persistedState?.casks ||
+          persistedState.casks.length < 10 ||
+          !persistedState.casks[0]?.appreciationData
+        ) {
+          console.log("Restoring default casks with new structure");
           return {
             ...persistedState,
             casks: DEFAULT_CASKS,
@@ -355,228 +619,8 @@ export const useAppStore = create<AppState>()(
       },
       // ADD DEBUG INFO
       onRehydrateStorage: () => (state) => {
-        console.log('Rehydrated state casks count:', state?.casks?.length);
+        console.log("Rehydrated state casks count:", state?.casks?.length);
       },
     }
   )
 );
-
-// // store/useAppStore.ts
-// import { create } from "zustand";
-// import { persist, createJSONStorage } from "zustand/middleware";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-
-// // Custom storage for web compatibility
-// const storage = {
-//   getItem: async (name: string) => {
-//     if (typeof window !== "undefined") {
-//       // Web environment: Use localStorage
-//       return localStorage.getItem(name);
-//     }
-//     // Native environment: Use AsyncStorage
-//     return await AsyncStorage.getItem(name);
-//   },
-//   setItem: async (name: string, value: string) => {
-//     if (typeof window !== "undefined") {
-//       // Web environment: Use localStorage
-//       localStorage.setItem(name, value);
-//     } else {
-//       // Native environment: Use AsyncStorage
-//       await AsyncStorage.setItem(name, value);
-//     }
-//   },
-//   removeItem: async (name: string) => {
-//     if (typeof window !== "undefined") {
-//       // Web environment: Use localStorage
-//       localStorage.removeItem(name);
-//     } else {
-//       // Native environment: Use AsyncStorage
-//       await AsyncStorage.removeItem(name);
-//     }
-//   },
-// };
-
-// interface Cask {
-//   id: string;
-//   name: string;
-//   year: number;
-//   volume: string;
-//   abv: string;
-//   location: string;
-//   estimatedValue: string;
-//   gain: string;
-//   gainPercentage: string;
-//   status: "Ready" | "Maturing";
-//   image: string;
-// }
-
-// interface Activity {
-//   id: string;
-//   title: string;
-//   subtitle: string;
-//   time: string;
-//   type: "gain" | "offer" | "reward";
-//   badge?: string;
-// }
-
-// interface Notification {
-//   id: string;
-//   title: string;
-//   message: string;
-//   time: string;
-//   type: "portfolio" | "offer" | "reward" | "event";
-//   read: boolean;
-// }
-
-// interface AppState {
-//   user: {
-//     id: string;
-//     name: string;
-//     email: string;
-//   } | null;
-//   theme: "light" | "dark" | "system";
-//   casks: Cask[];
-//   activities: Activity[];
-//   notifications: Notification[];
-//   portfolioStats: {
-//     totalValue: string;
-//     totalCasks: number;
-//     avgGrowth: string;
-//     lifetimeGain: string;
-//   };
-//   setUser: (user: AppState["user"]) => void;
-//   setTheme: (theme: AppState["theme"]) => void;
-//   setCasks: (casks: Cask[]) => void;
-//   addActivity: (activity: Activity) => void;
-//   addNotification: (notification: Notification) => void;
-//   markNotificationAsRead: (id: string) => void;
-//   logout: () => void;
-// }
-
-// export const useAppStore = create<AppState>()(
-//   persist(
-//     (set) => ({
-//       user: null,
-//       theme: "system",
-//       casks: [
-//         {
-//           id: "1",
-//           name: "Macallan",
-//           year: 1998,
-//           volume: "500L",
-//           abv: "63.2%",
-//           location: "New York, USA",
-//           estimatedValue: "$15,500",
-//           gain: "+$1,500",
-//           gainPercentage: "+9.3%",
-//           status: "Ready",
-//           image:
-//             "https://images.pexels.com/photos/602750/pexels-photo-602750.jpeg",
-//         },
-//         {
-//           id: "2",
-//           name: "Ardbeg",
-//           year: 1998,
-//           volume: "500L",
-//           abv: "63.2%",
-//           location: "New York, USA",
-//           estimatedValue: "$15,500",
-//           gain: "+$1,500",
-//           gainPercentage: "+2.3%",
-//           status: "Maturing",
-//           image:
-//             "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
-//         },
-//       ],
-//       activities: [
-//         {
-//           id: "1",
-//           title: "Macallan 25yr increased by $500",
-//           subtitle: "2 hours ago",
-//           time: "2 hours ago",
-//           type: "gain",
-//           badge: "+9.3%",
-//         },
-//         {
-//           id: "2",
-//           title: "New exclusive offer available",
-//           subtitle: "2 hours ago",
-//           time: "2 hours ago",
-//           type: "offer",
-//           badge: "New",
-//         },
-//         {
-//           id: "3",
-//           title: "Referral reward earned: $50",
-//           subtitle: "2 hours ago",
-//           time: "2 hours ago",
-//           type: "reward",
-//           badge: "Reward",
-//         },
-//       ],
-//       notifications: [
-//         {
-//           id: "1",
-//           title: "Portfolio Value Update",
-//           message: "Your Macallan 25yr cask has increased by £500 (+3.2%)",
-//           time: "2 hours ago",
-//           type: "portfolio",
-//           read: false,
-//         },
-//         {
-//           id: "2",
-//           title: "New Exclusive Offer",
-//           message: "Limited time: Rare Ardbeg collection now available",
-//           time: "2 day ago",
-//           type: "offer",
-//           read: false,
-//         },
-//         {
-//           id: "3",
-//           title: "Referral Reward Earned",
-//           message:
-//             "Congratulations! You've earned £50 for referring Sarah Johnson",
-//           time: "7 day ago",
-//           type: "reward",
-//           read: false,
-//         },
-//         {
-//           id: "4",
-//           title: "Whisky Tasting Event",
-//           message: "Edinburgh tasting event this weekend - 2 spots remaining",
-//           time: "1 week ago",
-//           type: "event",
-//           read: false,
-//         },
-//       ],
-//       portfolioStats: {
-//         totalValue: "$12,00", // Note: Fix typo here (should be "$12,000")
-//         totalCasks: 12,
-//         avgGrowth: "+120%",
-//         lifetimeGain: "+$120",
-//       },
-//       setUser: (user) => set({ user }),
-//       setTheme: (theme) => set({ theme }),
-//       setCasks: (casks) => set({ casks }),
-//       addActivity: (activity) =>
-//         set((state) => ({
-//           activities: [activity, ...state.activities],
-//         })),
-//       addNotification: (notification) =>
-//         set((state) => ({
-//           notifications: [notification, ...state.notifications],
-//         })),
-//       markNotificationAsRead: (id) =>
-//         set((state) => ({
-//           notifications: state.notifications.map((n) =>
-//             n.id === id ? { ...n, read: true } : n
-//           ),
-//         })),
-//       logout: () => set({ user: null }),
-//     }),
-//     {
-//       name: "app-storage",
-//       storage: createJSONStorage(() => storage),
-//     }
-//   )
-// );

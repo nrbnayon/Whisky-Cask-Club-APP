@@ -52,7 +52,7 @@ export const getCardShadow = (
 export const getInputShadow = (): ViewStyle => {
   if (Platform.OS === "android") {
     return {
-      elevation: 3,
+      elevation: 0,
       shadowColor: "#000000",
     };
   }
@@ -72,7 +72,7 @@ export const getInputShadow = (): ViewStyle => {
 export const getFocusedShadow = (): ViewStyle => {
   if (Platform.OS === "android") {
     return {
-      elevation: 6,
+      elevation: 0,
       shadowColor: "#3B82F6", // Primary color
     };
   }

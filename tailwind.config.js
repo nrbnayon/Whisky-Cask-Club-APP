@@ -56,7 +56,7 @@ module.exports = {
           dark: "#0f172a",
         },
         // Utility colors
-        surface: "#ffffff",
+        surface: "#F6FBFB",
         card: "#ffffff",
         overlay: "rgba(0, 0, 0, 0.5)",
         success: "#10b981",

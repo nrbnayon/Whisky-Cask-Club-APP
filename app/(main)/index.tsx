@@ -15,7 +15,7 @@ export default function HomeScreen() {
   const { user, casks, activities, portfolioStats } = useAppStore();
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <SafeAreaView className="flex-1 bg-surface">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="px-5 py-4">
           {/* Header */}
