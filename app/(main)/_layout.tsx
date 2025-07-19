@@ -130,7 +130,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="cask/[id]"
+        name="cask/[id]" // dynamic route
         options={{
           href: null,
         }}
