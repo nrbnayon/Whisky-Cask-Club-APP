@@ -19,8 +19,10 @@ export function FilterChip({
     <TouchableOpacity
       onPress={onPress}
       className={cn(
-        "px-4 py-2 rounded-full border",
-        active ? "bg-primary border-primary" : "bg-white border-gray-200",
+        "px-4 py-2 rounded-full mr-3",
+        active
+          ? "border bg-primary border-primary"
+          : "bg-white border-gray-200",
         className
       )}
     >

@@ -75,7 +75,7 @@ export default function HomeScreen() {
             Recent Casks
           </Text>
 
-          {casks.slice(0, 2).map((cask) => (
+          {casks.slice(0, 5).map((cask) => (
             <CaskCard
               key={cask.id}
               {...cask}
@@ -90,7 +90,7 @@ export default function HomeScreen() {
             Recent Activity
           </Text>
 
-          {activities.slice(0, 3).map((activity) => (
+          {activities.slice(0, 4).map((activity) => (
             <ActivityItem
               key={activity.id}
               title={activity.title}

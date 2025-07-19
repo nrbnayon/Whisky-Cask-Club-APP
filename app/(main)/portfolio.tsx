@@ -1,7 +1,8 @@
 import { View, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
-import { TrendingUp } from "lucide-react-native";
+import { TrendingUp, Package } from "lucide-react-native";
+import { useRouter } from "expo-router";
 import { useAppStore } from "@/store/useAppStore";
 import { StatCard } from "@/components/shared/StatCard";
 import { SearchInput } from "@/components/shared/SearchInput";
@@ -13,6 +14,7 @@ import CaskBottleIcon from "@/assets/images/cask-bottle.png";
 import MoneyBagIcon from "@/assets/images/money-bag.png";
 
 export default function PortfolioScreen() {
+  const router = useRouter();
   const { casks, activities, portfolioStats } = useAppStore();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All Casks");
@@ -27,6 +29,12 @@ export default function PortfolioScreen() {
       activeFilter === "All Casks" || cask.status === activeFilter;
     return matchesSearch && matchesFilter;
   });
+
+  console.log("All cask::", filteredCasks.length);
+
+  const handleViewDetails = (caskId: string) => {
+    router.push(`/(main)/cask/${caskId}` as any);
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-surface">
@@ -95,17 +103,31 @@ export default function PortfolioScreen() {
           </ScrollView>
 
           {/* Casks List */}
-          {filteredCasks.map((cask) => (
-            <CaskCard
-              key={cask.id}
-              {...cask}
-              borderColor="#E5D19E"
-              detailsButtonActive={true}
-              onViewDetails={() => {
-                // Navigate to cask details
-              }}
-            />
-          ))}
+          {filteredCasks.length > 0 ? (
+            filteredCasks.map((cask) => (
+              <CaskCard
+                key={cask.id}
+                {...cask}
+                borderColor="#E5D19E"
+                detailsButtonActive={true}
+                onViewDetails={() => handleViewDetails(cask.id)}
+              />
+            ))
+          ) : (
+            <View className="items-center justify-center py-12 px-4">
+              <Package size={48} color="#9CA3AF" />
+              <Text className="text-gray-500 text-lg font-medium mt-4 text-center">
+                No Casks Found
+              </Text>
+              <Text className="text-gray-400 text-sm mt-2 text-center">
+                {searchQuery
+                  ? `No casks match your search "${searchQuery}"`
+                  : activeFilter !== "All Casks"
+                    ? `No ${activeFilter.toLowerCase()} casks available`
+                    : "Your portfolio is empty"}
+              </Text>
+            </View>
+          )}
 
           {/* Recent Activity */}
           <Text className="text-gray-800 text-lg font-semibold mb-4 mt-6">

@@ -1,13 +1,13 @@
+
 // store/useAppStore.ts
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { Platform } from "react-native";
+import { Platform } from "react-native"; // UNCOMMENT THIS LINE
 
 // Custom storage for web compatibility
 const storage = {
   getItem: async (name: string) => {
-    // Check if we're in a web environment by checking for localStorage existence
     if (
       Platform.OS === "web" &&
       typeof window !== "undefined" &&
@@ -15,11 +15,9 @@ const storage = {
     ) {
       return localStorage.getItem(name);
     }
-    // Native environment: Use AsyncStorage
     return await AsyncStorage.getItem(name);
   },
   setItem: async (name: string, value: string) => {
-    // Check if we're in a web environment by checking for localStorage existence
     if (
       Platform.OS === "web" &&
       typeof window !== "undefined" &&
@@ -27,12 +25,10 @@ const storage = {
     ) {
       localStorage.setItem(name, value);
     } else {
-      // Native environment: Use AsyncStorage
       await AsyncStorage.setItem(name, value);
     }
   },
   removeItem: async (name: string) => {
-    // Check if we're in a web environment by checking for localStorage existence
     if (
       Platform.OS === "web" &&
       typeof window !== "undefined" &&
@@ -40,7 +36,6 @@ const storage = {
     ) {
       localStorage.removeItem(name);
     } else {
-      // Native environment: Use AsyncStorage
       await AsyncStorage.removeItem(name);
     }
   },
@@ -94,7 +89,6 @@ interface AppState {
     avgGrowth: string;
     lifetimeGain: string;
   };
-  // Forgot password related state
   forgotPasswordEmail: string | null;
   otpVerified: boolean;
   setUser: (user: AppState["user"]) => void;
@@ -103,47 +97,151 @@ interface AppState {
   addActivity: (activity: Activity) => void;
   addNotification: (notification: Notification) => void;
   markNotificationAsRead: (id: string) => void;
-  // Forgot password actions
   setForgotPasswordEmail: (email: string) => void;
   setOtpVerified: (verified: boolean) => void;
   logout: () => void;
 }
+
+// DEFINE YOUR 10 CASKS AS A CONSTANT
+const DEFAULT_CASKS: Cask[] = [
+  {
+    id: "1",
+    name: "Macallan",
+    year: 1998,
+    volume: "500L",
+    abv: "63.2%",
+    location: "New York, USA",
+    estimatedValue: "$15,500",
+    gain: "+$1,500",
+    gainPercentage: "+9.3%",
+    status: "Ready",
+    image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg", // whiskey bottles
+  },
+  {
+    id: "2",
+    name: "Ardbeg",
+    year: 1998,
+    volume: "500L",
+    abv: "63.2%",
+    location: "New York, USA",
+    estimatedValue: "$15,500",
+    gain: "+$1,500",
+    gainPercentage: "+2.3%",
+    status: "Maturing",
+    image: "https://images.pexels.com/photos/3649262/pexels-photo-3649262.jpeg", // whiskey barrel
+  },
+  {
+    id: "3",
+    name: "Lagavulin",
+    year: 2001,
+    volume: "450L",
+    abv: "61.8%",
+    location: "Islay, Scotland",
+    estimatedValue: "$12,800",
+    gain: "+$1,200",
+    gainPercentage: "+10.3%",
+    status: "Ready",
+    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg", // scotch in glass
+  },
+  {
+    id: "4",
+    name: "Glenlivet",
+    year: 2005,
+    volume: "600L",
+    abv: "60.1%",
+    location: "Speyside, Scotland",
+    estimatedValue: "$10,000",
+    gain: "+$900",
+    gainPercentage: "+9.0%",
+    status: "Maturing",
+    image: "https://images.pexels.com/photos/279303/pexels-photo-279303.jpeg", // whiskey pouring
+  },
+  {
+    id: "5",
+    name: "Balvenie",
+    year: 2003,
+    volume: "550L",
+    abv: "62.0%",
+    location: "Dufftown, Scotland",
+    estimatedValue: "$13,200",
+    gain: "+$1,100",
+    gainPercentage: "+8.3%",
+    status: "Ready",
+    image: "https://images.pexels.com/photos/1283220/pexels-photo-1283220.jpeg", // whiskey glass
+  },
+  {
+    id: "6",
+    name: "Highland Park",
+    year: 2000,
+    volume: "480L",
+    abv: "64.0%",
+    location: "Orkney, Scotland",
+    estimatedValue: "$14,300",
+    gain: "+$1,300",
+    gainPercentage: "+9.1%",
+    status: "Maturing",
+    image: "https://images.pexels.com/photos/678111/pexels-photo-678111.jpeg", // bottle and glass
+  },
+  {
+    id: "7",
+    name: "Glenfiddich",
+    year: 1997,
+    volume: "500L",
+    abv: "59.5%",
+    location: "Speyside, Scotland",
+    estimatedValue: "$11,900",
+    gain: "+$800",
+    gainPercentage: "+7.2%",
+    status: "Ready",
+    image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg", // whisky shelves
+  },
+  {
+    id: "8",
+    name: "Laphroaig",
+    year: 1999,
+    volume: "520L",
+    abv: "65.3%",
+    location: "Islay, Scotland",
+    estimatedValue: "$14,900",
+    gain: "+$1,400",
+    gainPercentage: "+10.4%",
+    status: "Maturing",
+    image: "https://images.pexels.com/photos/5946979/pexels-photo-5946979.jpeg", // whiskey on bar
+  },
+  {
+    id: "9",
+    name: "Dalmore",
+    year: 2002,
+    volume: "470L",
+    abv: "62.7%",
+    location: "Highlands, Scotland",
+    estimatedValue: "$13,700",
+    gain: "+$1,000",
+    gainPercentage: "+7.9%",
+    status: "Ready",
+    image: "https://images.pexels.com/photos/1006960/pexels-photo-1006960.jpeg", // aged bottles
+  },
+  {
+    id: "10",
+    name: "Oban",
+    year: 2004,
+    volume: "490L",
+    abv: "60.9%",
+    location: "West Highlands, Scotland",
+    estimatedValue: "$12,500",
+    gain: "+$950",
+    gainPercentage: "+8.2%",
+    status: "Maturing",
+    image: "https://images.pexels.com/photos/1267318/pexels-photo-1267318.jpeg", // whisky collection
+  },
+];
 
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
       user: null,
       theme: "system",
-      casks: [
-        {
-          id: "1",
-          name: "Macallan",
-          year: 1998,
-          volume: "500L",
-          abv: "63.2%",
-          location: "New York, USA",
-          estimatedValue: "$15,500",
-          gain: "+$1,500",
-          gainPercentage: "+9.3%",
-          status: "Ready",
-          image:
-            "https://images.pexels.com/photos/602750/pexels-photo-602750.jpeg",
-        },
-        {
-          id: "2",
-          name: "Ardbeg",
-          year: 1998,
-          volume: "500L",
-          abv: "63.2%",
-          location: "New York, USA",
-          estimatedValue: "$15,500",
-          gain: "+$1,500",
-          gainPercentage: "+2.3%",
-          status: "Maturing",
-          image:
-            "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
-        },
-      ],
+      casks: DEFAULT_CASKS, 
       activities: [
         {
           id: "1",
@@ -190,8 +288,7 @@ export const useAppStore = create<AppState>()(
         {
           id: "3",
           title: "Referral Reward Earned",
-          message:
-            "Congratulations! You've earned £50 for referring Sarah Johnson",
+          message: "Congratulations! You've earned £50 for referring Sarah Johnson",
           time: "7 day ago",
           type: "reward",
           read: false,
@@ -211,7 +308,6 @@ export const useAppStore = create<AppState>()(
         avgGrowth: "+120%",
         lifetimeGain: "+$120",
       },
-      // Forgot password state
       forgotPasswordEmail: null,
       otpVerified: false,
       setUser: (user) => set({ user }),
@@ -231,7 +327,6 @@ export const useAppStore = create<AppState>()(
             n.id === id ? { ...n, read: true } : n
           ),
         })),
-      // Forgot password actions
       setForgotPasswordEmail: (email) => set({ forgotPasswordEmail: email }),
       setOtpVerified: (verified) => set({ otpVerified: verified }),
       logout: () =>
@@ -243,7 +338,25 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "app-storage",
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => storage),
+      version: 2, // INCREMENT THIS TO FORCE RESET
+      // ADD MIGRATION LOGIC
+      migrate: (persistedState: any, version: number) => {
+        console.log('Migrating from version:', version);
+        // If stored data doesn't have all casks, use default
+        if (!persistedState?.casks || persistedState.casks.length < 10) {
+          console.log('Restoring default casks');
+          return {
+            ...persistedState,
+            casks: DEFAULT_CASKS,
+          };
+        }
+        return persistedState;
+      },
+      // ADD DEBUG INFO
+      onRehydrateStorage: () => (state) => {
+        console.log('Rehydrated state casks count:', state?.casks?.length);
+      },
     }
   )
 );

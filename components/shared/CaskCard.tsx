@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Eye, MapPin } from "lucide-react-native";
-import { getCardShadow } from "@/utils/shadows";
+// import { getCardShadow } from "@/utils/shadows";
 
 interface CaskCardProps {
   id: string;
@@ -35,50 +35,75 @@ export function CaskCard({
   detailsButtonActive,
   onViewDetails,
 }: CaskCardProps) {
+
   return (
     <View
-      className="rounded-xl p-4 mb-4"
+      className="rounded-lg p-4 mb-4"
       style={[
         {
           backgroundColor: "#FFFFFF",
-          borderWidth: 1,
-          borderColor: `${borderColor}`,
+          borderWidth: 1.5,
+          borderColor: borderColor,
+          shadowColor: "#0000001A",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.08,
+          shadowRadius: 8,
+          elevation: 3,
         },
-        getCardShadow("sm"),
+        // getCardShadow("sm"),
       ]}
     >
       <View className="flex-row items-start">
         <Image
           source={{ uri: image }}
-          className="w-20 h-20 object-cover rounded-lg mr-3"
+          className="w-20 h-20 rounded-lg mr-3"
+          style={{ width: 80, height: 80 }}
           resizeMode="cover"
         />
 
         <View className="flex-1">
-          <View className="flex-row items-center justify-between mb-1">
-            <Text className="text-lg font-semibold text-gray-800">{name}</Text>
-            <View className="bg-green-50 rounded-full border border-green-300 px-2 py-1 ">
-              <Text className="text-xs text-green-600">{gainPercentage}</Text>
+          <View className="flex-row items-center justify-between mb-2">
+            <Text
+              className="text-lg font-semibold text-gray-800"
+              numberOfLines={1}
+            >
+              {name}
+            </Text>
+            <View className="bg-green-50 rounded-full border border-green-300 px-4 py-1 ml-2">
+              <Text className="text-sm font-normal text-green-600">
+                {gainPercentage}
+              </Text>
             </View>
           </View>
 
           <Text className="text-sm text-gray-600 mb-1">Year: {year}</Text>
-          <Text className="text-sm text-gray-600 mb-2">
+          <Text className="text-sm text-gray-600 mb-3">
             Volume: {volume} - ABV: {abv}
           </Text>
 
-          <View className="flex-row items-center mb-3">
-            <MapPin size={12} color="#9CA3AF" />
-            <Text className="text-xs text-gray-500 ml-1">{location}</Text>
+          <View className="flex-row items-center justify-between mb-4">
+            <View className="flex-row items-center flex-1 mr-2">
+              <MapPin size={14} color="#9CA3AF" />
+              <Text
+                className="text-sm text-gray-500 ml-1"
+                numberOfLines={1}
+                style={{ flexShrink: 1 }}
+              >
+                {location}
+              </Text>
+            </View>
             <View
-              className={`ml-auto px-2 py-1 rounded-full border ${
+              className={`px-4 py-1 rounded-full border ${
                 status === "Ready"
                   ? "border-green-300 bg-green-50"
                   : "border-orange-300 bg-orange-100"
               }`}
             >
               <Text
-                className={`text-xs ${
+                className={`text-sm font-normal ${
                   status === "Ready" ? "text-green-600" : "text-orange-600"
                 }`}
               >
@@ -87,37 +112,37 @@ export function CaskCard({
             </View>
           </View>
 
-          <View className="flex-row justify-between items-center mb-3">
+          <View className="flex-row justify-between items-start">
             <View>
-              <Text className="text-xs text-gray-500">Estimated Value</Text>
-              <Text className="text-base font-semibold text-gray-800">
+              <Text className="text-sm text-gray-500 mb-1">
+                Estimated Value
+              </Text>
+              <Text className="text-lg font-medium text-gray-800">
                 {estimatedValue}
               </Text>
             </View>
             <View className="items-end">
-              <Text className="text-xs text-gray-500">Gain</Text>
-              <Text className="text-base font-semibold text-green-600">
-                {gain}
-              </Text>
+              <Text className="text-sm text-gray-500 mb-1">Gain</Text>
+              <Text className="text-lg font-medium text-green-600">{gain}</Text>
             </View>
           </View>
-
-          {detailsButtonActive && (
-            <TouchableOpacity
-              onPress={onViewDetails}
-              className="w-full py-3 rounded-lg items-center justify-center"
-              style={{ backgroundColor: "#D4AF37" }}
-            >
-              <View className="flex-row items-center">
-                <Eye size={16} color="white" />
-                <Text className="text-white font-semibold ml-2">
-                  View Details
-                </Text>
-              </View>
-            </TouchableOpacity>
-          )}
         </View>
       </View>
+
+      {detailsButtonActive && (
+        <TouchableOpacity
+          onPress={onViewDetails}
+          className="w-full py-4 rounded-md items-center justify-center mt-4"
+          style={{ backgroundColor: "#B8860B" }}
+        >
+          <View className="flex-row items-center">
+            <Eye size={18} color="white" />
+            <Text className="text-white font-semibold ml-2 text-base">
+              View Details
+            </Text>
+          </View>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
