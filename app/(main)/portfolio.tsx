@@ -46,7 +46,7 @@ export default function PortfolioScreen() {
           </Text>
 
           {/* Stats */}
-          <View className="flex-row mb-6 space-x-3">
+          <View className="flex-row mb-6" style={{ gap: 6 }}>
             <StatCard
               iconImage={CaskBottleIcon}
               iconBgColor="#FEF3C7"

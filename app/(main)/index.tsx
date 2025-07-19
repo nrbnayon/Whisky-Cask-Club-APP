@@ -35,12 +35,12 @@ export default function HomeScreen() {
           </View>
 
           {/* Profile Summary */}
-          <Text className="text-gray-800 text-lg font-semibold mb-4 font-manrope">
+          <Text className="text-gray-800 text-lg font-semibold mb-4">
             Profile Summary
           </Text>
 
           {/* Stats */}
-          <View className="flex-row mb-6 space-x-3">
+          <View className="flex-row mb-6" style={{ gap: 8 }}>
             <StatCard
               iconImage={CaskBottleIcon}
               iconBgColor="#FEF3C7"
@@ -61,17 +61,17 @@ export default function HomeScreen() {
             <StatCard
               iconImage={MoneyBagIcon}
               iconColor="#059669"
-              iconBgColor="#CDFFDF"
-              cardBgColor="#EFFAF3"
-              borderColor="#CDFFDF"
+              iconBgColor="#D1FAE5"
+              cardBgColor="#ECFDF5"
+              borderColor="#A7F3D0"
               title="Lifetime Gain"
               value={portfolioStats.lifetimeGain}
-              valueColor="text-[#22C55E]"
+              valueColor="text-green-600"
             />
           </View>
 
           {/* Recent Casks */}
-          <Text className="text-gray-800 text-lg font-semibold mb-4">
+          <Text className="text-gray-800 text-lg font-medium mb-4">
             Recent Casks
           </Text>
 
@@ -86,7 +86,7 @@ export default function HomeScreen() {
           ))}
 
           {/* Recent Activity */}
-          <Text className="text-gray-800 text-lg font-semibold mb-4 mt-6 font-manrope">
+          <Text className="text-gray-800 text-lg font-semibold mb-4 mt-6">
             Recent Activity
           </Text>
 

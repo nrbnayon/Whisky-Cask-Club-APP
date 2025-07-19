@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Eye, MapPin } from "lucide-react-native";
-import { Shadow } from "react-native-shadow-2";
+// import { Shadow } from "react-native-shadow-2";
 // import { getCardShadow } from "@/utils/shadows";
 
 interface CaskCardProps {
@@ -37,12 +37,12 @@ export function CaskCard({
   onViewDetails,
 }: CaskCardProps) {
   return (
-    <Shadow
-      distance={42}
-      offset={[0, 8]}
-      startColor="rgba(0,0,0,0.1)"
-      style={{ width: "100%" }}
-    >
+    // <Shadow
+    //   distance={42}
+    //   offset={[0, 8]}
+    //   startColor="rgba(0,0,0,0.1)"
+    //   style={{ width: "100%" }}
+    // >
       <View
         className="rounded-md p-4 mb-4"
         style={[
@@ -50,14 +50,11 @@ export function CaskCard({
             backgroundColor: "#FFFFFF",
             borderWidth: 1.5,
             borderColor: borderColor,
-            // shadowColor: "#0000001A",
-            // shadowOffset: {
-            //   width: 0,
-            //   height: 2,
-            // },
-            // shadowOpacity: 0.08,
-            // shadowRadius: 8,
-            // elevation: 0,
+            shadowColor: "#0000001A",
+            shadowOffset: { width: 0, height: 8 },
+            shadowOpacity: 0.1,
+            shadowRadius: 42,
+            elevation: 8,
           },
           // getCardShadow("sm"),
         ]}
@@ -152,6 +149,6 @@ export function CaskCard({
           </TouchableOpacity>
         )}
       </View>
-    </Shadow>
+    // </Shadow>
   );
 }
