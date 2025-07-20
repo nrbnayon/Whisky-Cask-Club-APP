@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Eye, EyeOff } from "lucide-react-native";
 import { clsx } from "clsx";
-import { getCardShadow, getFocusedShadow } from "@/utils/shadows";
+// import { getCardShadow, getFocusedShadow } from "@/utils/shadows";
 
 interface InputProps {
   label?: string;
@@ -19,8 +19,9 @@ interface InputProps {
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   autoCapitalize?: "none" | "sentences" | "words" | "characters";
   error?: string;
-  className?: string;
-  labelClassName?: string; // Added labelClassName prop
+  className?: string; // Applied to the outer View
+  inputClassName?: string; // New prop for TextInput-specific classes
+  labelClassName?: string;
 }
 
 export function Input({
@@ -33,7 +34,8 @@ export function Input({
   autoCapitalize = "sentences",
   error,
   className,
-  labelClassName, // Added labelClassName prop
+  inputClassName, // Added prop for TextInput-specific styling
+  labelClassName,
 }: InputProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -45,22 +47,17 @@ export function Input({
   return (
     <View className={clsx("mb-4", className)}>
       {label && (
-        <Text
-          className={clsx(
-            "text-black font-semibold mb-2",
-            labelClassName // Use labelClassName if provided, otherwise use default
-          )}
-        >
+        <Text className={clsx("text-black font-semibold mb-2", labelClassName)}>
           {label}
         </Text>
       )}
-      <View className="relative">
+      <View className='relative'>
         {/* Shadow container */}
         <View
-          className="w-full"
+          className='w-full'
           style={[
             styles.inputContainer,
-            isFocused ? getFocusedShadow() : getCardShadow("sm"),
+            // isFocused ? getFocusedShadow() : getCardShadow("sm"),
             {
               borderColor: error
                 ? "#EF4444" // error color
@@ -74,7 +71,7 @@ export function Input({
             value={value}
             onChangeText={onChangeText}
             placeholder={placeholder}
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor='#9CA3AF'
             secureTextEntry={secureTextEntry && !showPassword}
             keyboardType={keyboardType}
             autoCapitalize={autoCapitalize}
@@ -82,7 +79,8 @@ export function Input({
             onBlur={() => setIsFocused(false)}
             className={clsx(
               "w-full px-4 py-3 font-manrope text-base text-primary-dark",
-              secureTextEntry ? "pr-12" : ""
+              secureTextEntry ? "pr-12" : "",
+              inputClassName // Apply input-specific Tailwind classes
             )}
             style={styles.input}
           />
@@ -90,18 +88,18 @@ export function Input({
         {secureTextEntry && (
           <TouchableOpacity
             onPress={handleTogglePassword}
-            className="absolute right-3 top-3"
+            className='absolute right-3 top-1/2 -translate-y-1/2'
           >
             {showPassword ? (
-              <EyeOff size={20} color="#9CA3AF" />
+              <EyeOff size={20} color='#9CA3AF' />
             ) : (
-              <Eye size={20} color="#9CA3AF" />
+              <Eye size={20} color='#9CA3AF' />
             )}
           </TouchableOpacity>
         )}
       </View>
       {error && (
-        <Text className="text-error font-manrope text-sm mt-1">{error}</Text>
+        <Text className='text-error font-manrope text-sm mt-1'>{error}</Text>
       )}
     </View>
   );
@@ -109,13 +107,12 @@ export function Input({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#F6FBFB",
     borderWidth: 1,
     borderRadius: 8,
-    // Base shadow applied dynamically
   },
   input: {
     backgroundColor: "transparent",
-    borderWidth: 0, // Remove border from input to avoid double borders
+    borderWidth: 0,
   },
 });

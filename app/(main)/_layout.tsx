@@ -186,6 +186,20 @@ export default function TabLayout() {
           href: null,
         }}
       />
+      <Tabs.Screen
+        name='payment/add-account-card'
+        options={{
+          headerShown: false,
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name='edit-profile'
+        options={{
+          headerShown: false,
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }

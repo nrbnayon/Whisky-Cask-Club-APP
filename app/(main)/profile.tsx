@@ -1,3 +1,4 @@
+// app\(main)\profile.tsx
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -97,37 +98,37 @@ export default function ProfileScreen() {
         </View>
 
         {/* Profile Info */}
-          <View className='py-4 flex-row items-center'>
-            <View className='relative'>
-              <Image
-                source={{
-                  uri:
-                    user?.avatar ||
-                    "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
-                }}
-                className='w-16 h-16 rounded-full'
-                resizeMode='cover'
-              />
-              <View className='absolute -bottom-1 -right-1 w-6 h-6 bg-gray-400 rounded-full items-center justify-center'>
-                <View className='w-3 h-3 bg-white rounded-full' />
-              </View>
-            </View>
-            <View className='ml-4 flex-1'>
-              <Text className='text-xl font-semibold text-gray-800 mb-1'>
-                {user?.name || "John Max"}
-              </Text>
-              <Text className='text-gray-600'>
-                Balance: ${user?.balance || 150}
-              </Text>
+        <View className='py-4 flex-row items-center'>
+          <View className='relative'>
+            <Image
+              source={{
+                uri:
+                  user?.avatar ||
+                  "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
+              }}
+              className='w-16 h-16 rounded-full'
+              resizeMode='cover'
+            />
+            <View className='absolute -bottom-1 -right-1 w-6 h-6 bg-gray-400 rounded-full items-center justify-center'>
+              <View className='w-3 h-3 bg-white rounded-full' />
             </View>
           </View>
+          <View className='ml-4 flex-1'>
+            <Text className='text-xl font-semibold text-gray-800 mb-1'>
+              {user?.name || "John Max"}
+            </Text>
+            <Text className='text-gray-600'>
+              Balance: ${user?.balance || 150}
+            </Text>
+          </View>
+        </View>
 
         {/* Menu Items */}
         <View className='mt-4 rounded-md p-4'>
           <ProfileMenuItem
             icon={User}
             title='Edit Profile'
-            onPress={() => router.push("/(screen)/edit-profile" as any)}
+            onPress={() => router.push("/(main)/edit-profile" as any)}
           />
           <ProfileMenuItem
             icon={CreditCard}
