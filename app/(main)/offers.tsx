@@ -5,7 +5,7 @@ import { Gift } from "lucide-react-native";
 export default function OffersScreen() {
   return (
     <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 px-6 py-8">
+      <View className="flex-1 p-4">
         <Text className="text-primary-dark text-2xl font-bold mb-8 font-manrope">
           Offers
         </Text>

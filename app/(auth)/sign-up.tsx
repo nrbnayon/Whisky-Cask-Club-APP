@@ -63,21 +63,21 @@ export default function SignUpScreen() {
   // Remove custom password toggle since Input component likely has its own
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
-      <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}>
-        <View className="py-6">
-          <Text className="text-black text-3xl font-semibold mb-8">
+    <SafeAreaView className='flex-1 bg-surface'>
+      <ScrollView className='flex-1 px-4' showsVerticalScrollIndicator={false}>
+        <View className='py-6'>
+          <Text className='text-black text-3xl font-semibold mb-8'>
             Create a new{"\n"}Account
           </Text>
 
-          <View className="space-y-6">
+          <View className='space-y-6'>
             <Controller
               control={control}
-              name="name"
+              name='name'
               render={({ field: { onChange, value } }) => (
                 <Input
-                  label="Name"
-                  placeholder="Enter your Name"
+                  label='Name'
+                  placeholder='Enter your Name'
                   value={value}
                   onChangeText={onChange}
                   error={errors.name?.message}
@@ -87,15 +87,15 @@ export default function SignUpScreen() {
 
             <Controller
               control={control}
-              name="email"
+              name='email'
               render={({ field: { onChange, value } }) => (
                 <Input
-                  label="Email"
-                  placeholder="example@gmail.com"
+                  label='Email'
+                  placeholder='example@gmail.com'
                   value={value}
                   onChangeText={onChange}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
+                  keyboardType='email-address'
+                  autoCapitalize='none'
                   error={errors.email?.message}
                 />
               )}
@@ -103,11 +103,11 @@ export default function SignUpScreen() {
 
             <Controller
               control={control}
-              name="password"
+              name='password'
               render={({ field: { onChange, value } }) => (
                 <Input
-                  label="Password"
-                  placeholder="Enter your Password"
+                  label='Password'
+                  placeholder='Enter your Password'
                   value={value}
                   onChangeText={onChange}
                   secureTextEntry={!showPassword}
@@ -118,11 +118,11 @@ export default function SignUpScreen() {
 
             <Controller
               control={control}
-              name="confirmPassword"
+              name='confirmPassword'
               render={({ field: { onChange, value } }) => (
                 <Input
-                  label="Confirm Password"
-                  placeholder="Confirm your Password"
+                  label='Confirm Password'
+                  placeholder='Confirm your Password'
                   value={value}
                   onChangeText={onChange}
                   secureTextEntry={!showConfirmPassword}
@@ -133,11 +133,11 @@ export default function SignUpScreen() {
 
             <Controller
               control={control}
-              name="referralCode"
+              name='referralCode'
               render={({ field: { onChange, value } }) => (
                 <Input
-                  label="Referral Code (Optional)"
-                  placeholder="Enter your referral code"
+                  label='Referral Code (Optional)'
+                  placeholder='Enter your referral code'
                   value={value}
                   onChangeText={onChange}
                   error={errors.referralCode?.message}
@@ -147,12 +147,12 @@ export default function SignUpScreen() {
 
             <Controller
               control={control}
-              name="agreeToPrivacyPolicy"
+              name='agreeToPrivacyPolicy'
               render={({ field: { onChange, value } }) => (
                 <Checkbox
                   checked={value}
                   onPress={() => onChange(!value)}
-                  label="I agree to the privacy policy."
+                  label='I agree to the privacy policy.'
                   error={errors.agreeToPrivacyPolicy?.message}
                 />
               )}
@@ -162,17 +162,17 @@ export default function SignUpScreen() {
               onPress={handleSubmit(onSubmit)}
               loading={isLoading}
               disabled={!agreeToPrivacyPolicy}
-              size="lg"
-              className="w-full bg-primary mt-6 "
+              size='lg'
+              className='w-full bg-primary mt-6 '
             >
               Sign Up
             </Button>
 
-            <View className="items-center mt-6 pb-8">
-              <Text className="text-primary-dark text-base">
+            <View className='items-center mt-6 pb-8'>
+              <Text className='text-primary-dark text-base'>
                 Already have an Account?{" "}
                 <Text
-                  className="text-primary font-semibold"
+                  className='text-primary font-semibold'
                   onPress={() => router.push("/(auth)/sign-in")}
                 >
                   Sign In

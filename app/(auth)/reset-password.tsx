@@ -62,45 +62,45 @@ export default function ResetPasswordScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 px-5">
+    <SafeAreaView className='flex-1 bg-surface'>
+      <View className='flex-1 px-4'>
         {/* Header */}
-        <View className="flex-row items-center pt-4 pb-8">
-          <TouchableOpacity onPress={() => router.back()} className="mr-2">
-            <ChevronLeft size={24} color="#1F2937" />
+        <View className='flex-row items-center pt-4 pb-8'>
+          <TouchableOpacity onPress={() => router.back()} className='mr-2'>
+            <ChevronLeft size={24} color='#1F2937' />
           </TouchableOpacity>
-          <Text className="text-dark text-lg font-medium">Forget Password</Text>
+          <Text className='text-dark text-lg font-medium'>Forget Password</Text>
         </View>
 
         {/* Content */}
-        <View className="flex-1 justify-center">
-          <Text className="text-dark text-xl font-semibold mb-8">
+        <View className='flex-1 justify-center'>
+          <Text className='text-dark text-xl font-semibold mb-8'>
             Create Your New password
           </Text>
 
           <Controller
             control={control}
-            name="password"
+            name='password'
             render={({ field: { onChange, value } }) => (
               <Input
-                label="New Password"
-                placeholder="Enter your Password"
+                label='New Password'
+                placeholder='Enter your Password'
                 value={value}
                 onChangeText={onChange}
                 secureTextEntry
                 error={errors.password?.message}
-                className="mb-4"
+                className='mb-4'
               />
             )}
           />
 
           <Controller
             control={control}
-            name="confirmPassword"
+            name='confirmPassword'
             render={({ field: { onChange, value } }) => (
               <Input
-                label="Re-type password"
-                placeholder="Enter Re-Password"
+                label='Re-type password'
+                placeholder='Enter Re-Password'
                 value={value}
                 onChangeText={onChange}
                 secureTextEntry
@@ -111,11 +111,11 @@ export default function ResetPasswordScreen() {
         </View>
 
         {/* Bottom Button */}
-        <View className="pb-8">
+        <View className='pb-8'>
           <Button
             onPress={handleSubmit(onSubmit)}
             loading={isLoading}
-            className="w-full"
+            className='w-full'
           >
             Create Now
           </Button>
@@ -124,7 +124,7 @@ export default function ResetPasswordScreen() {
 
       <SuccessModal
         visible={showSuccessModal}
-        title="Your password has been reset successfully."
+        title='Your password has been reset successfully.'
         onClose={handleSuccessClose}
       />
     </SafeAreaView>

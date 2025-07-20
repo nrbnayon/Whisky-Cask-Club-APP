@@ -50,33 +50,33 @@ export default function ForgotPasswordScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 px-5">
+    <SafeAreaView className='flex-1 bg-surface'>
+      <View className='flex-1 px-4'>
         {/* Header */}
-        <View className="flex-row items-center pt-4 pb-8">
-          <TouchableOpacity onPress={() => router.back()} className="mr-2">
-            <ChevronLeft size={24} color="#1F2937" />
+        <View className='flex-row items-center pt-4 pb-8'>
+          <TouchableOpacity onPress={() => router.back()} className='mr-2'>
+            <ChevronLeft size={24} color='#1F2937' />
           </TouchableOpacity>
-          <Text className="text-dark text-lg font-medium">Forget Password</Text>
+          <Text className='text-dark text-lg font-medium'>Forget Password</Text>
         </View>
 
         {/* Content */}
-        <View className="flex-1 justify-center">
-          <Text className="text-dark text-base leading-6 mb-8">
+        <View className='flex-1 justify-center'>
+          <Text className='text-dark text-base leading-6 mb-8'>
             Select which contact details should we use to reset your password.
           </Text>
 
           <Controller
             control={control}
-            name="email"
+            name='email'
             render={({ field: { onChange, value } }) => (
               <Input
-                label="Email"
-                placeholder="example@gmail.com"
+                label='Email'
+                placeholder='example@gmail.com'
                 value={value}
                 onChangeText={onChange}
-                keyboardType="email-address"
-                autoCapitalize="none"
+                keyboardType='email-address'
+                autoCapitalize='none'
                 error={errors.email?.message}
               />
             )}
@@ -84,11 +84,11 @@ export default function ForgotPasswordScreen() {
         </View>
 
         {/* Bottom Button */}
-        <View className="pb-8">
+        <View className='pb-8'>
           <Button
             onPress={handleSubmit(onSubmit)}
             loading={isLoading}
-            className="w-full"
+            className='w-full'
           >
             Continue
           </Button>

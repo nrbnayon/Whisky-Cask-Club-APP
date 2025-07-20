@@ -37,7 +37,7 @@ export function StatCard({
       shadowRadius: 42, 
     },
     android: {
-      elevation: 2, 
+      elevation: 8, 
     },
   });
 

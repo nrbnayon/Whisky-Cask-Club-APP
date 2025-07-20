@@ -37,60 +37,60 @@ export default function PortfolioScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
+    <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="px-6 py-4">
+        <View className='p-4'>
           {/* Header */}
-          <Text className="text-gray-800 text-2xl font-semibold mb-4">
+          <Text className='text-gray-800 text-2xl font-semibold mb-4'>
             Casks Portfolio
           </Text>
 
           {/* Stats */}
-          <View className="flex-row mb-6" style={{ gap: 6 }}>
+          <View className='flex-row mb-6' style={{ gap: 12 }}>
             <StatCard
               iconImage={CaskBottleIcon}
-              iconBgColor="#FEF3C7"
-              cardBgColor="#FFFBEB"
-              borderColor="#FBEFD0"
-              title="Total Casks"
+              iconBgColor='#FEF3C7'
+              cardBgColor='#FFFBEB'
+              borderColor='#FBEFD0'
+              title='Total Casks'
               value={portfolioStats.totalCasks.toString()}
             />
             <StatCard
               icon={TrendingUp}
-              iconColor="#0891B2"
-              iconBgColor="#CFFAFE"
-              cardBgColor="#F0F9FF"
-              borderColor="#BAE6FD"
-              title="Total Value"
+              iconColor='#0891B2'
+              iconBgColor='#CFFAFE'
+              cardBgColor='#F0F9FF'
+              borderColor='#BAE6FD'
+              title='Total Value'
               value={portfolioStats.totalValue}
             />
             <StatCard
               iconImage={MoneyBagIcon}
-              iconColor="#059669"
-              iconBgColor="#CDFFDF"
-              cardBgColor="#EFFAF3"
-              borderColor="#CDFFDF"
-              title="Lifetime Gain"
+              iconColor='#059669'
+              iconBgColor='#CDFFDF'
+              cardBgColor='#EFFAF3'
+              borderColor='#CDFFDF'
+              title='Lifetime Gain'
               value={portfolioStats.lifetimeGain}
-              valueColor="text-[#22C55E]"
+              valueColor='text-[#22C55E]'
             />
           </View>
 
           {/* Search */}
           <SearchInput
-            placeholder="Search your casks..."
+            placeholder='Search your casks...'
             value={searchQuery}
             onChangeText={setSearchQuery}
-            className="mb-4"
+            className='mb-4'
           />
 
           {/* Filters */}
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            className="mb-6"
+            className='mb-6'
           >
-            <View className="flex-row space-x-3">
+            <View className='flex-row space-x-3'>
               {filters.map((filter) => (
                 <FilterChip
                   key={filter}
@@ -108,18 +108,18 @@ export default function PortfolioScreen() {
               <CaskCard
                 key={cask.id}
                 {...cask}
-                borderColor="#E5D19E"
+                borderColor='#E5D19E'
                 detailsButtonActive={true}
                 onViewDetails={() => handleViewDetails(cask.id)}
               />
             ))
           ) : (
-            <View className="items-center justify-center py-12 px-4">
-              <Package size={48} color="#9CA3AF" />
-              <Text className="text-gray-500 text-lg font-medium mt-4 text-center">
+            <View className='items-center justify-center py-12 px-4'>
+              <Package size={48} color='#9CA3AF' />
+              <Text className='text-gray-500 text-lg font-medium mt-4 text-center'>
                 No Casks Found
               </Text>
-              <Text className="text-gray-400 text-sm mt-2 text-center">
+              <Text className='text-gray-400 text-sm mt-2 text-center'>
                 {searchQuery
                   ? `No casks match your search "${searchQuery}"`
                   : activeFilter !== "All Casks"
@@ -130,7 +130,7 @@ export default function PortfolioScreen() {
           )}
 
           {/* Recent Activity */}
-          <Text className="text-gray-800 text-lg font-semibold mb-4 mt-6">
+          <Text className='text-gray-800 text-lg font-semibold mb-4 mt-6'>
             Recent Activity
           </Text>
 

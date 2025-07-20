@@ -197,27 +197,27 @@ export default function VerifyOTPScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 px-5">
+    <SafeAreaView className='flex-1 bg-surface'>
+      <View className='flex-1 px-4'>
         {/* Header */}
-        <View className="flex-row items-center pt-4 pb-8">
-          <TouchableOpacity onPress={() => router.back()} className="mr-2">
-            <ChevronLeft size={24} color="#1F2937" />
+        <View className='flex-row items-center pt-4 pb-8'>
+          <TouchableOpacity onPress={() => router.back()} className='mr-2'>
+            <ChevronLeft size={24} color='#1F2937' />
           </TouchableOpacity>
-          <Text className="text-dark text-lg font-medium">Forget Password</Text>
+          <Text className='text-dark text-lg font-medium'>Forget Password</Text>
         </View>
 
         {/* Content */}
-        <View className="flex-1 justify-center">
-          <Text className="text-dark text-base leading-6 mb-4">
+        <View className='flex-1 justify-center'>
+          <Text className='text-dark text-base leading-6 mb-4'>
             Code has been send to{" "}
-            <Text className="text-primary font-medium">
+            <Text className='text-primary font-medium'>
               {forgotPasswordEmail || "infogma@gmail.com"}
             </Text>
           </Text>
 
           {/* OTP Input */}
-          <View className="flex-row justify-between mb-8 mt-8">
+          <View className='flex-row justify-between mb-8 mt-8'>
             {otp.map((digit, index) => (
               <TextInput
                 key={index}
@@ -229,37 +229,37 @@ export default function VerifyOTPScreen() {
                 onKeyPress={({ nativeEvent }) =>
                   handleKeyPress(nativeEvent.key, index)
                 }
-                className="w-16 h-16 border border-gray-300 rounded-lg text-center text-2xl font-bold bg-white"
+                className='w-16 h-16 border border-gray-300 rounded-lg text-center text-2xl font-bold bg-white'
                 maxLength={1}
-                keyboardType="numeric"
+                keyboardType='numeric'
                 autoFocus={index === 0}
               />
             ))}
           </View>
 
           {/* Resend Timer */}
-          <View className="items-center mb-8">
+          <View className='items-center mb-8'>
             {canResend ? (
               <TouchableOpacity onPress={handleResendOTP} disabled={isLoading}>
-                <Text className="text-primary font-medium text-base">
+                <Text className='text-primary font-medium text-base'>
                   Resend Code
                 </Text>
               </TouchableOpacity>
             ) : (
-              <Text className="text-gray-500 text-base">
+              <Text className='text-gray-500 text-base'>
                 Resend Code in{" "}
-                <Text className="text-primary">{formatTime(timer)}</Text>
+                <Text className='text-primary'>{formatTime(timer)}</Text>
               </Text>
             )}
           </View>
         </View>
 
         {/* Bottom Button */}
-        <View className="pb-8">
+        <View className='pb-8'>
           <Button
             onPress={handleVerifyOTP}
             loading={isLoading}
-            className="w-full"
+            className='w-full'
           >
             Verify
           </Button>

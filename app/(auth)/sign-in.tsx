@@ -59,32 +59,32 @@ export default function SignInScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 px-5">
+    <SafeAreaView className='flex-1 bg-surface'>
+      <View className='flex-1 px-4'>
         {/* Form */}
-        <View className="flex-1 justify-center">
-          <Text className="text-black text-3xl font-semibold mb-8">
+        <View className='flex-1 justify-center'>
+          <Text className='text-black text-3xl font-semibold mb-8'>
             Sign In Now
           </Text>
           {__DEV__ && (
-            <View className="mb-4 p-3 bg-yellow-100 rounded-lg">
-              <Text className="text-xs text-yellow-800">
+            <View className='mb-4 p-3 bg-yellow-100 rounded-lg'>
+              <Text className='text-xs text-yellow-800'>
                 🚧 DEV MODE: Default credentials loaded
               </Text>
             </View>
           )}
           <Controller
             control={control}
-            name="email"
+            name='email'
             render={({ field: { onChange, value } }) => (
-              <View className="mb-4">
-                <Text className="text-black font-semibold mb-2">Email</Text>
+              <View className='mb-4'>
+                <Text className='text-black font-semibold mb-2'>Email</Text>
                 <Input
-                  placeholder="example@gmail.com"
+                  placeholder='example@gmail.com'
                   value={value}
                   onChangeText={onChange}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
+                  keyboardType='email-address'
+                  autoCapitalize='none'
                   error={errors.email?.message}
                 />
               </View>
@@ -94,11 +94,11 @@ export default function SignInScreen() {
           {/* Custom Password Input */}
           <Controller
             control={control}
-            name="password"
+            name='password'
             render={({ field: { onChange, value } }) => (
               <Input
-                label="Password"
-                placeholder="Enter your Password"
+                label='Password'
+                placeholder='Enter your Password'
                 value={value}
                 onChangeText={onChange}
                 secureTextEntry={!showPassword}
@@ -109,9 +109,9 @@ export default function SignInScreen() {
 
           <TouchableOpacity
             onPress={() => router.push("/(auth)/forgot-password")}
-            className="self-end mb-6"
+            className='self-end mb-6'
           >
-            <Text className="text-primary font-manrope font-medium">
+            <Text className='text-primary font-manrope font-medium'>
               Forgot password?
             </Text>
           </TouchableOpacity>
@@ -119,29 +119,29 @@ export default function SignInScreen() {
           <Button
             onPress={handleSubmit(onSubmit)}
             loading={isLoading}
-            className="w-full mb-5"
-            size="lg"
+            className='w-full mb-5'
+            size='lg'
           >
             Sign In
           </Button>
 
           {/* Social Login */}
-          <View className="flex-row justify-center items-center mb-8">
+          <View className='flex-row justify-center items-center mb-8'>
             <TouchableOpacity>
               <GoogleIcon width={40} height={40} />
             </TouchableOpacity>
-            <Text className="text-gray-400 font-manrope text-sm mx-2">OR</Text>
+            <Text className='text-gray-400 font-manrope text-sm mx-2'>OR</Text>
             <TouchableOpacity>
               <AppleIcon width={40} height={40} />
             </TouchableOpacity>
           </View>
 
-          <View className="flex-row justify-center">
-            <Text className="text-gray-600 font-manrope">
+          <View className='flex-row justify-center'>
+            <Text className='text-gray-600 font-manrope'>
               Don&apos;t have an Account?{" "}
             </Text>
             <TouchableOpacity onPress={() => router.push("/(auth)/sign-up")}>
-              <Text className="text-primary font-manrope font-medium">
+              <Text className='text-primary font-manrope font-medium'>
                 Sign Up
               </Text>
             </TouchableOpacity>
