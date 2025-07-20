@@ -13,7 +13,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#F8F9FA"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.whiskycaskclub.app",
@@ -46,6 +48,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "38ec843c-4120-47b6-9c4a-637eb8c8baa0"
+      }
     }
   }
 }
