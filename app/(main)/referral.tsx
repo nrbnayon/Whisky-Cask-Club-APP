@@ -5,7 +5,7 @@ import { Users } from "lucide-react-native";
 export default function ReferralScreen() {
   return (
     <SafeAreaView className="flex-1 bg-surface">
-      <View className="flex-1 p-4">
+      <View className="flex-1 p-5">
         <Text className="text-primary-dark text-2xl font-bold mb-8 font-manrope">
           Referral
         </Text>

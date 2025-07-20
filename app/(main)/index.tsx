@@ -17,7 +17,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className='p-4'>
+        <View className='p-5'>
           {/* Header */}
           <View className='flex-row items-center justify-between mb-6'>
             <View>

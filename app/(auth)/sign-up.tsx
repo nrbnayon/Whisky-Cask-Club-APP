@@ -64,7 +64,7 @@ export default function SignUpScreen() {
 
   return (
     <SafeAreaView className='flex-1 bg-surface'>
-      <ScrollView className='flex-1 px-4' showsVerticalScrollIndicator={false}>
+      <ScrollView className='flex-1 p-5' showsVerticalScrollIndicator={false}>
         <View className='py-6'>
           <Text className='text-black text-3xl font-semibold mb-8'>
             Create a new{"\n"}Account

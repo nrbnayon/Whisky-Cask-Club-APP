@@ -60,7 +60,7 @@ export default function SignInScreen() {
 
   return (
     <SafeAreaView className='flex-1 bg-surface'>
-      <View className='flex-1 px-4'>
+      <View className='flex-1 px-5'>
         {/* Form */}
         <View className='flex-1 justify-center'>
           <Text className='text-black text-3xl font-semibold mb-8'>

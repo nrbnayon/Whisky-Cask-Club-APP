@@ -39,7 +39,7 @@ export default function PortfolioScreen() {
   return (
     <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className='p-4'>
+        <View className='p-5'>
           {/* Header */}
           <Text className='text-gray-800 text-2xl font-semibold mb-4'>
             Casks Portfolio
