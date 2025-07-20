@@ -274,7 +274,7 @@ export default function CaskDetailsScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className='flex-row items-center p-4'>
-          <TouchableOpacity onPress={() => router.back()} className='mr-3'>
+          <TouchableOpacity onPress={() => router.back()} className='mr-2'>
             <ArrowLeft size={24} color='#374151' />
           </TouchableOpacity>
           <Text className='text-gray-800 text-xl font-medium'>
@@ -441,11 +441,11 @@ export default function CaskDetailsScreen() {
                 </Text>
               </View>
 
-              <View className='space-y-3'>
+              <View style={{ gap: 8 }}>
                 {cask.futureForecasts.map((forecast, index) => (
                   <View
                     key={index}
-                    className='flex-row justify-between items-center p-4 bg-[#EDEDED] rounded-md my-1'
+                    className='flex-row justify-between items-center p-5 bg-[#EDEDED] rounded-md'
                   >
                     <Text className='text-gray-600 font-medium'>
                       {forecast.year}
@@ -457,7 +457,7 @@ export default function CaskDetailsScreen() {
                 ))}
               </View>
 
-              <View className='bg-green-50 rounded-md p-4 mt-4'>
+              <View className='bg-[#D8E0D5] rounded-md p-5 mt-4'>
                 <Text className='text-green-700 text-sm'>
                   Projected 5-year appreciation:{" "}
                   <Text className='font-semibold'>

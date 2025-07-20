@@ -197,7 +197,7 @@ export default function CashOutScreen() {
       <ScrollView showsVerticalScrollIndicator={false} className='flex-1'>
         {/* Header */}
         <View className='flex-row items-center p-5 bg-white'>
-          <TouchableOpacity onPress={handleGoBack} className='mr-3'>
+          <TouchableOpacity onPress={handleGoBack} className='mr-2'>
             <ArrowLeft size={24} color='#374151' />
           </TouchableOpacity>
           <Text className='text-gray-900 text-xl font-semibold'>Cash Out</Text>
@@ -395,7 +395,7 @@ export default function CashOutScreen() {
 //       <ScrollView showsVerticalScrollIndicator={false} className='flex-1'>
 //         {/* Header */}
 //         <View className='flex-row items-center p-5'>
-//           <TouchableOpacity onPress={handleGoBack} className='mr-3'>
+//           <TouchableOpacity onPress={handleGoBack} className='mr-2'>
 //             <ArrowLeft size={24} color='#374151' />
 //           </TouchableOpacity>
 //           <Text className='text-gray-900 text-xl font-semibold'>Cash Out</Text>

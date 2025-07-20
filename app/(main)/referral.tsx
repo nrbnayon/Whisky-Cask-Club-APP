@@ -44,7 +44,7 @@ export default function ReferralScreen() {
     }
   };
 
-  const StatCard = ({
+  const StatsCard = ({
     title,
     value,
     bgColor,
@@ -159,19 +159,19 @@ export default function ReferralScreen() {
 
           {/* Stats Cards */}
           <View className='flex-row mb-6'>
-            <StatCard
+            <StatsCard
               title='Total Referral'
               value={referralData.totalReferrals}
               bgColor='bg-orange-50'
               textColor='text-orange-600'
             />
-            <StatCard
+            <StatsCard
               title='Completed'
               value={referralData.completedReferrals}
               bgColor='bg-green-50'
               textColor='text-green-600'
             />
-            <StatCard
+            <StatsCard
               title='Total Earned'
               value={`$${referralData.totalEarned}`}
               bgColor='bg-red-50'

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TrendingUp, Package } from "lucide-react-native";
 import { useRouter } from "expo-router";
 import { useAppStore } from "@/store/useAppStore";
-import { StatCard } from "@/components/shared/StatCard";
+import { StatsCard } from "@/components/shared/StatsCard";
 import { SearchInput } from "@/components/shared/SearchInput";
 import { FilterChip } from "@/components/shared/FilterChip";
 import { CaskCard } from "@/components/shared/CaskCard";
@@ -47,7 +47,7 @@ export default function PortfolioScreen() {
 
           {/* Stats */}
           <View className='flex-row mb-6' style={{ gap: 8 }}>
-            <StatCard
+            <StatsCard
               iconImage={CaskBottleIcon}
               iconBgColor='#FEF3C7'
               cardBgColor='#FFFBEB'
@@ -55,7 +55,7 @@ export default function PortfolioScreen() {
               title='Total Casks'
               value={portfolioStats.totalCasks.toString()}
             />
-            <StatCard
+            <StatsCard
               icon={TrendingUp}
               iconColor='#0891B2'
               iconBgColor='#CFFAFE'
@@ -64,7 +64,7 @@ export default function PortfolioScreen() {
               title='Total Value'
               value={portfolioStats.totalValue}
             />
-            <StatCard
+            <StatsCard
               iconImage={MoneyBagIcon}
               iconColor='#059669'
               iconBgColor='#CDFFDF'

@@ -1,7 +1,7 @@
 import { View, Text, Image, Platform } from "react-native";
 import { LucideIcon } from "lucide-react-native";
 
-interface StatCardProps {
+interface StatsCardProps {
   icon?: LucideIcon;
   iconImage?: any;
   iconColor?: string;
@@ -13,7 +13,7 @@ interface StatCardProps {
   valueColor?: string;
 }
 
-export function StatCard({
+export function StatsCard({
   icon: Icon,
   iconImage,
   iconColor = "#000000",
@@ -23,7 +23,7 @@ export function StatCard({
   title = "",
   value = "",
   valueColor = "text-gray-800",
-}: StatCardProps) {
+}: StatsCardProps) {
   // Drop shadow configuration matching your design
   const shadowStyle = Platform.select({
     ios: {

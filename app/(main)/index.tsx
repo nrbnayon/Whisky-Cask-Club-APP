@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { Bell, TrendingUp } from "lucide-react-native";
 import { useAppStore } from "@/store/useAppStore";
-import { StatCard } from "@/components/shared/StatCard";
+import { StatsCard } from "@/components/shared/StatsCard";
 import { CaskCard } from "@/components/shared/CaskCard";
 import { ActivityItem } from "@/components/shared/ActivityItem";
 
@@ -41,7 +41,7 @@ export default function HomeScreen() {
 
           {/* Stats */}
           <View className='flex-row mb-6' style={{ gap: 8 }}>
-            <StatCard
+            <StatsCard
               iconImage={CaskBottleIcon}
               iconBgColor='#FEF3C7'
               cardBgColor='#FFFBEB'
@@ -49,7 +49,7 @@ export default function HomeScreen() {
               title='Total Casks'
               value={portfolioStats.totalCasks.toString()}
             />
-            <StatCard
+            <StatsCard
               icon={TrendingUp}
               iconColor='#0891B2'
               iconBgColor='#CFFAFE'
@@ -58,7 +58,7 @@ export default function HomeScreen() {
               title='Total Value'
               value={portfolioStats.totalValue}
             />
-            <StatCard
+            <StatsCard
               iconImage={MoneyBagIcon}
               iconColor='#059669'
               iconBgColor='#D1FAE5'
