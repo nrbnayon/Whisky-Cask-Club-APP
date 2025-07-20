@@ -229,7 +229,7 @@ export default function VerifyOTPScreen() {
                 onKeyPress={({ nativeEvent }) =>
                   handleKeyPress(nativeEvent.key, index)
                 }
-                className='w-16 h-16 border border-gray-300 rounded-lg text-center text-2xl font-bold bg-white'
+                className='w-16 h-16 border border-gray-300 rounded-md text-center text-2xl font-bold bg-white'
                 maxLength={1}
                 keyboardType='numeric'
                 autoFocus={index === 0}

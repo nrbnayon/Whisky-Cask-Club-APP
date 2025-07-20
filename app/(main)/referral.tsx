@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Share,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Share } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Copy,
@@ -32,7 +26,7 @@ export default function ReferralScreen() {
       showToast("success", "Copied!", "Referral code copied to clipboard");
       setTimeout(() => setCopiedCode(false), 2000);
     } catch (error) {
-      console.log("referral error::", error)
+      console.log("referral error::", error);
       showToast("error", "Failed to copy", "Please try again");
     }
   };
@@ -61,7 +55,7 @@ export default function ReferralScreen() {
     bgColor: string;
     textColor: string;
   }) => (
-    <View className={`flex-1 ${bgColor} rounded-xl p-4 mx-1`}>
+    <View className={`flex-1 ${bgColor} rounded-md p-4 mx-1`}>
       <Text className={`text-2xl font-bold ${textColor} text-center mb-1`}>
         {value}
       </Text>
@@ -82,7 +76,7 @@ export default function ReferralScreen() {
     status: string;
     reward: number;
   }) => (
-    <View className='bg-green-50 rounded-xl p-4 mb-3 flex-row items-center justify-between'>
+    <View className='bg-green-50 rounded-md p-4 mb-3 flex-row items-center justify-between'>
       <View className='flex-row items-center flex-1'>
         <View className='w-10 h-10 bg-green-500 rounded-full items-center justify-center mr-3'>
           <Check size={20} color='white' />
@@ -113,7 +107,7 @@ export default function ReferralScreen() {
     amount: number;
     status: string;
   }) => (
-    <View className='bg-green-50 rounded-xl p-4 mb-3 flex-row items-center justify-between'>
+    <View className='bg-green-50 rounded-md p-4 mb-3 flex-row items-center justify-between'>
       <View className='flex-row items-center flex-1'>
         <View className='w-10 h-10 bg-green-500 rounded-full items-center justify-center mr-3'>
           <Gift size={20} color='white' />
@@ -197,7 +191,7 @@ export default function ReferralScreen() {
               startColor='rgba(0,0,0,0.1)'
               style={{ width: "100%", marginBottom: 16 }}
             >
-              <View className='bg-orange-50 border border-orange-200 rounded-xl p-4'>
+              <View className='bg-orange-50 border border-orange-200 rounded-md p-4'>
                 <Text className='text-primary text-2xl font-bold text-center mb-2'>
                   {referralData.referralCode}
                 </Text>
@@ -209,7 +203,7 @@ export default function ReferralScreen() {
 
             <TouchableOpacity
               onPress={handleCopyCode}
-              className='bg-primary rounded-xl py-4 flex-row items-center justify-center'
+              className='bg-primary rounded-md py-4 flex-row items-center justify-center'
             >
               <Copy size={20} color='white' />
               <Text className='text-white font-semibold ml-2 text-lg'>
@@ -227,7 +221,7 @@ export default function ReferralScreen() {
             <View className='flex-row flex-wrap'>
               <TouchableOpacity
                 onPress={() => handleShare("whatsapp")}
-                className='bg-green-500 rounded-xl py-3 px-6 flex-row items-center mr-3 mb-3'
+                className='bg-green-500 rounded-md py-3 px-6 flex-row items-center mr-3 mb-3'
               >
                 <MessageCircle size={20} color='white' />
                 <Text className='text-white font-semibold ml-2'>
@@ -237,7 +231,7 @@ export default function ReferralScreen() {
 
               <TouchableOpacity
                 onPress={() => handleShare("email")}
-                className='bg-white border border-gray-300 rounded-xl py-3 px-6 flex-row items-center mr-3 mb-3'
+                className='bg-white border border-gray-300 rounded-md py-3 px-6 flex-row items-center mr-3 mb-3'
               >
                 <Mail size={20} color='#374151' />
                 <Text className='text-gray-700 font-semibold ml-2'>Email</Text>
@@ -245,7 +239,7 @@ export default function ReferralScreen() {
 
               <TouchableOpacity
                 onPress={() => handleShare("facebook")}
-                className='bg-blue-600 rounded-xl py-3 px-6 flex-row items-center mr-3 mb-3'
+                className='bg-blue-600 rounded-md py-3 px-6 flex-row items-center mr-3 mb-3'
               >
                 <Facebook size={20} color='white' />
                 <Text className='text-white font-semibold ml-2'>Facebook</Text>
@@ -253,7 +247,7 @@ export default function ReferralScreen() {
 
               <TouchableOpacity
                 onPress={() => handleShare("twitter")}
-                className='bg-blue-400 rounded-xl py-3 px-6 flex-row items-center mb-3'
+                className='bg-blue-400 rounded-md py-3 px-6 flex-row items-center mb-3'
               >
                 <Twitter size={20} color='white' />
                 <Text className='text-white font-semibold ml-2'>Twitter</Text>
@@ -291,7 +285,7 @@ export default function ReferralScreen() {
               startColor='rgba(0,0,0,0.1)'
               style={{ width: "100%" }}
             >
-              <View className='bg-white rounded-xl p-4'>
+              <View className='bg-white rounded-md p-4'>
                 <HowItWorksStep
                   step={1}
                   title='Share your code'

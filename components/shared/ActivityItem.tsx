@@ -60,19 +60,19 @@ export function ActivityItem({
 
   return (
     <View
-      className="bg-white rounded-lg p-4 mb-3 border border-[#DBDADA]"
+      className='bg-white rounded-md p-4 mb-3 border border-[#DBDADA]'
       // style={getCardShadow("sm")}
     >
-      <View className="flex-row items-center justify-between gap-1">
-        <View className="flex-row items-center flex-1">
+      <View className='flex-row items-center justify-between gap-1'>
+        <View className='flex-row items-center flex-1'>
           {/* Colored dot indicator */}
           <View className={`w-3 h-3 rounded-full mr-3 ${getIconColor()}`} />
 
-          <View className="flex-1">
-            <Text className="text-base font-normal text-gray-900 mb-1.5">
+          <View className='flex-1'>
+            <Text className='text-base font-normal text-gray-900 mb-1.5'>
               {title}
             </Text>
-            <Text className="text-sm text-gray-500">{time}</Text>
+            <Text className='text-sm text-gray-500'>{time}</Text>
           </View>
         </View>
 

@@ -254,7 +254,7 @@ export default function CashOutScreen() {
             />
 
             {watchedAmount && !errors.amount && (
-              <View className='bg-blue-50 p-3 rounded-lg'>
+              <View className='bg-blue-50 p-3 rounded-md'>
                 <Text className='text-blue-800 text-sm'>
                   You&apos;ll receive ${watchedAmount} in 1-2 business days
                 </Text>
@@ -453,7 +453,7 @@ export default function CashOutScreen() {
 //             {/* Visa Card Option */}
 //             <TouchableOpacity
 //               onPress={() => setSelectedPaymentMethod("visa")}
-//               className={`bg-white rounded-lg border p-4 flex-row items-center ${
+//               className={`bg-white rounded-md border p-4 flex-row items-center ${
 //                 selectedPaymentMethod === "visa"
 //                   ? "border-blue-500"
 //                   : "border-gray-200"

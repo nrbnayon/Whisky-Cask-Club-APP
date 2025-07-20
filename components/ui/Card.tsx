@@ -17,7 +17,7 @@ export function Card({
   return (
     <View
       className={cn(
-        "bg-white rounded-xl p-4 border border-gray-100",
+        "bg-white rounded-md p-4 border border-gray-100",
         className
       )}
       style={getCardShadow(shadowLevel)}

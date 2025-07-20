@@ -36,7 +36,7 @@ export function SuccessModal({ visible, title, onClose }: SuccessModalProps) {
 
               {/* Main circle */}
               <View className='w-36 h-36 p-20 bg-primary rounded-full items-center justify-center'>
-                <View className='w-16 h-16 bg-card rounded-2xl items-center justify-center'>
+                <View className='w-16 h-16 bg-card rounded-md items-center justify-center'>
                   <Check size={32} color='#B8860B' strokeWidth={3} />
                 </View>
               </View>

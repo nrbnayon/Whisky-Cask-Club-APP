@@ -6,7 +6,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import CaskBottleIcon from "@/assets/images/cask-bottle.png";
 
 // Custom tab bar icon component with rounded background for active state
-function CustomTabBarIcon({
+export function CustomTabBarIcon({
   icon: Icon,
   color,
   focused,

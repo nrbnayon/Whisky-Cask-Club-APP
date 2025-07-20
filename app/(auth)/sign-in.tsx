@@ -67,7 +67,7 @@ export default function SignInScreen() {
             Sign In Now
           </Text>
           {__DEV__ && (
-            <View className='mb-4 p-3 bg-yellow-100 rounded-lg'>
+            <View className='mb-4 p-3 bg-yellow-100 rounded-md'>
               <Text className='text-xs text-yellow-800'>
                 🚧 DEV MODE: Default credentials loaded
               </Text>

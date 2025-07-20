@@ -10,7 +10,7 @@ export default function WelcomeScreen() {
       <View className='flex-1 p-5 justify-center'>
         {/* Logo Section */}
         <View className='items-center mb-10'>
-          <View className='rounded-2xl items-center justify-center mb-4 relative'>
+          <View className='rounded-md items-center justify-center mb-4 relative'>
             <Image source={Logo} className='w-72' resizeMode='contain' />
           </View>
 

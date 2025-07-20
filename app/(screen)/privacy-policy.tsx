@@ -114,7 +114,7 @@ export default function PrivacyPolicyScreen() {
             Address: 123 Whisky Lane, Edinburgh, Scotland
           </Section>
 
-          <View className='bg-gray-50 rounded-xl p-4 mt-6'>
+          <View className='bg-gray-50 rounded-md p-4 mt-6'>
             <Text className='text-sm text-gray-600 text-center'>
               By using our services, you acknowledge that you have read and
               understood this Privacy Policy and agree to the collection and use
