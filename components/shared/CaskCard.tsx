@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Eye, MapPin } from "lucide-react-native";
 // import { Shadow } from "react-native-shadow-2";

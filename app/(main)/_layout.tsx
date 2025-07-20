@@ -1,26 +1,52 @@
 // app\(main)\_layout.tsx
 import { Tabs } from "expo-router";
-import { View, Text, StyleSheet } from "react-native";
-import { Home, Briefcase, Gift, Users, User } from "lucide-react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
+import { Home, Gift, User } from "lucide-react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
+import CaskBottleIcon from "@/assets/images/cask-bottle.png";
 
 // Custom tab bar icon component with rounded background for active state
 function CustomTabBarIcon({
   icon: Icon,
   color,
-  size,
   focused,
   title,
+  isImage = false,
+  imageSource,
+  isFontAwesome = false,
+  fontAwesomeName,
+  isOutline = false,
 }: {
-  icon: any;
+  icon?: any;
   color: string;
   size: number;
   focused: boolean;
   title: string;
+  isImage?: boolean;
+  imageSource?: any;
+  isFontAwesome?: boolean;
+  fontAwesomeName?: string;
+  isOutline?: boolean;
 }) {
   if (focused) {
     return (
       <View style={styles.activeTabContainer}>
-        <Icon size={20} color="#ffffff" />
+        {isImage ? (
+          <Image
+            source={imageSource}
+            style={[styles.iconImage, { tintColor: "#ffffff" }]}
+            resizeMode='contain'
+          />
+        ) : isFontAwesome ? (
+          <FontAwesome5
+            name={fontAwesomeName}
+            size={20}
+            color='#ffffff'
+            solid={!isOutline}
+          />
+        ) : (
+          <Icon size={20} color='#ffffff' />
+        )}
         <Text style={styles.activeTabText}>{title}</Text>
       </View>
     );
@@ -28,7 +54,22 @@ function CustomTabBarIcon({
 
   return (
     <View style={styles.inactiveTabContainer}>
-      <Icon size={20} color={color} />
+      {isImage ? (
+        <Image
+          source={imageSource}
+          style={[styles.iconImage, { tintColor: color }]}
+          resizeMode='contain'
+        />
+      ) : isFontAwesome ? (
+        <FontAwesome5
+          name={fontAwesomeName}
+          size={20}
+          color={color}
+          solid={!isOutline}
+        />
+      ) : (
+        <Icon size={20} color={color} />
+      )}
       <Text style={[styles.inactiveTabText, { color }]}>{title}</Text>
     </View>
   );
@@ -45,7 +86,7 @@ export default function TabLayout() {
           borderTopColor: "#e5e7eb",
           height: 90,
           paddingBottom: 20,
-          paddingTop: 20,
+          paddingTop: 24,
           paddingLeft: 20,
           paddingRight: 20,
         },
@@ -55,7 +96,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
           title: "Home",
           tabBarIcon: ({ color, size, focused }) => (
@@ -64,28 +105,29 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title="Home"
+              title='Home'
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="portfolio"
+        name='portfolio'
         options={{
           title: "Portfolio",
           tabBarIcon: ({ color, size, focused }) => (
             <CustomTabBarIcon
-              icon={Briefcase}
               color={color}
               size={size}
               focused={focused}
-              title="Portfolio"
+              title='Portfolio'
+              isImage={true}
+              imageSource={CaskBottleIcon}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="offers"
+        name='offers'
         options={{
           title: "Offers",
           tabBarIcon: ({ color, size, focused }) => (
@@ -94,28 +136,30 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title="Offers"
+              title='Offers'
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="referral"
+        name='referral'
         options={{
           title: "Referral",
           tabBarIcon: ({ color, size, focused }) => (
             <CustomTabBarIcon
-              icon={Users}
               color={color}
               size={size}
               focused={focused}
-              title="Referral"
+              title='Referral'
+              isFontAwesome={true}
+              fontAwesomeName='users'
+              isOutline={true}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name='profile'
         options={{
           title: "Profile",
           tabBarIcon: ({ color, size, focused }) => (
@@ -124,14 +168,21 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title="Profile"
+              title='Profile'
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="cask/[id]" // dynamic route
+        name='cask/[id]' // dynamic route
         options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name='payment/payment'
+        options={{
+          headerShown: false,
           href: null,
         }}
       />
@@ -165,5 +216,9 @@ const styles = StyleSheet.create({
   inactiveTabText: {
     fontSize: 12,
     marginTop: 4,
+  },
+  iconImage: {
+    width: 20,
+    height: 20,
   },
 });

@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Text, Image, Platform } from "react-native";
 import { LucideIcon } from "lucide-react-native";
 
@@ -37,7 +36,7 @@ export function StatCard({
       shadowRadius: 42, 
     },
     android: {
-      elevation: 8, 
+      elevation: 4, 
     },
   });
 

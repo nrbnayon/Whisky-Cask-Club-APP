@@ -99,16 +99,76 @@ interface Notification {
   read: boolean;
 }
 
+interface Offer {
+  id: string;
+  title: string;
+  description: string;
+  type: "cask" | "bottle" | "experience";
+  image: string;
+  originalPrice: string;
+  currentPrice: string;
+  location: string;
+  rating: number;
+  daysLeft: number;
+  details: {
+    distillery?: string;
+    vintage?: string;
+    volume?: string;
+    abv?: string;
+    maturationPeriod?: string;
+    caskType?: string;
+    bottle?: string;
+    packaging?: string;
+    certificates?: string;
+    duration?: string;
+    tastings?: string;
+    participants?: string;
+    includes?: string;
+  };
+  badge?: string;
+}
+
+interface ReferralStat {
+  id: string;
+  name: string;
+  email: string;
+  referredDate: string;
+  status: "Completed" | "Pending";
+  reward: number;
+}
+
+interface RewardHistory {
+  id: string;
+  title: string;
+  description: string;
+  amount: number;
+  status: "Approved" | "Pending";
+  date: string;
+}
+
 interface AppState {
   user: {
     id: string;
     name: string;
     email: string;
+    balance?: number;
+    avatar?: string;
+    firstName?: string;
+    lastName?: string;
   } | null;
   theme: "light" | "dark" | "system";
   casks: Cask[];
   activities: Activity[];
   notifications: Notification[];
+  offers: Offer[];
+  referralData: {
+    totalReferrals: number;
+    completedReferrals: number;
+    totalEarned: number;
+    referralCode: string;
+    referralStats: ReferralStat[];
+    rewardHistory: RewardHistory[];
+  };
   portfolioStats: {
     totalValue: string;
     totalCasks: number;
@@ -120,11 +180,13 @@ interface AppState {
   setUser: (user: AppState["user"]) => void;
   setTheme: (theme: AppState["theme"]) => void;
   setCasks: (casks: Cask[]) => void;
+  setOffers: (offers: Offer[]) => void;
   addActivity: (activity: Activity) => void;
   addNotification: (notification: Notification) => void;
   markNotificationAsRead: (id: string) => void;
   setForgotPasswordEmail: (email: string) => void;
   setOtpVerified: (verified: boolean) => void;
+  updateUserProfile: (updates: Partial<AppState["user"]>) => void;
   logout: () => void;
 }
 
@@ -495,12 +557,142 @@ const DEFAULT_CASKS: Cask[] = [
   },
 ];
 
+// DEFAULT OFFERS DATA
+const DEFAULT_OFFERS: Offer[] = [
+  {
+    id: "1",
+    title: "Rare Macallan 30yr Cask",
+    description:
+      "A highly sought-after single malt matured for three decades, offering exceptional depth, and investment value.",
+    type: "cask",
+    image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
+    originalPrice: "$18,000",
+    currentPrice: "$15,500",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    details: {
+      distillery: "Macallan",
+      vintage: "1998",
+      volume: "500L",
+      abv: "63.2%",
+      maturationPeriod: "30 Years",
+      caskType: "Sherry Hogshead",
+    },
+    badge: "Cask",
+  },
+  {
+    id: "2",
+    title: "Limited Edition Bottle Set",
+    description:
+      "Collector's set of 6 rare bottles from prestigious distilleries.",
+    type: "bottle",
+    image: "https://images.pexels.com/photos/3649262/pexels-photo-3649262.jpeg",
+    originalPrice: "$18,000",
+    currentPrice: "$15,500",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    details: {
+      bottle: "6 Bottle",
+      packaging: "Premium Gift Box",
+      volume: "700ml each",
+      certificates: "Authenticity Included",
+    },
+    badge: "Bottle",
+  },
+  {
+    id: "3",
+    title: "Whisky Tasting Experience",
+    description:
+      "Private tasting with master distiller including rare expressions",
+    type: "experience",
+    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    originalPrice: "$8.00",
+    currentPrice: "$500",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    details: {
+      duration: "3 Hours",
+      tastings: "12 Premium Whiskies",
+      participants: "Up to 8 people",
+      includes: "Food Pairing",
+    },
+    badge: "Experience",
+  },
+  // Duplicate entries for demonstration
+  {
+    id: "4",
+    title: "Rare Macallan 30yr Cask",
+    description:
+      "A highly sought-after single malt matured for three decades, offering exceptional depth, and investment value.",
+    type: "cask",
+    image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
+    originalPrice: "$18,000",
+    currentPrice: "$15,500",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    details: {
+      distillery: "Macallan",
+      vintage: "1998",
+      volume: "500L",
+      abv: "63.2%",
+      maturationPeriod: "30 Years",
+      caskType: "Sherry Hogshead",
+    },
+    badge: "Cask",
+  },
+  {
+    id: "5",
+    title: "Limited Edition Bottle Set",
+    description:
+      "Collector's set of 6 rare bottles from prestigious distilleries.",
+    type: "bottle",
+    image: "https://images.pexels.com/photos/3649262/pexels-photo-3649262.jpeg",
+    originalPrice: "$18,000",
+    currentPrice: "$15,500",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    details: {
+      bottle: "6 Bottle",
+      packaging: "Premium Gift Box",
+      volume: "700ml each",
+      certificates: "Authenticity Included",
+    },
+    badge: "Bottle",
+  },
+  {
+    id: "6",
+    title: "Whisky Tasting Experience",
+    description:
+      "Private tasting with master distiller including rare expressions",
+    type: "experience",
+    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    originalPrice: "$8.00",
+    currentPrice: "$500",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    details: {
+      duration: "3 Hours",
+      tastings: "12 Premium Whiskies",
+      participants: "Up to 8 people",
+      includes: "Food Pairing",
+    },
+    badge: "Experience",
+  },
+];
+
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
       user: null,
       theme: "system",
       casks: DEFAULT_CASKS,
+      offers: DEFAULT_OFFERS,
       activities: [
         {
           id: "1",
@@ -527,6 +719,48 @@ export const useAppStore = create<AppState>()(
           badge: "Reward",
         },
       ],
+      referralData: {
+        totalReferrals: 12,
+        completedReferrals: 8,
+        totalEarned: 400,
+        referralCode: "JAMES2024",
+        referralStats: [
+          {
+            id: "1",
+            name: "Sarah Johnson",
+            email: "sarah@example.com",
+            referredDate: "2025-01-25",
+            status: "Completed",
+            reward: 50,
+          },
+          {
+            id: "2",
+            name: "Emma Wilson",
+            email: "emma@example.com",
+            referredDate: "2025-03-15",
+            status: "Completed",
+            reward: 50,
+          },
+        ],
+        rewardHistory: [
+          {
+            id: "1",
+            title: "Referral Bonus",
+            description: "Sarah Johnson joined and made first investment",
+            amount: 50,
+            status: "Approved",
+            date: "2025-01-25",
+          },
+          {
+            id: "2",
+            title: "Referral Bonus",
+            description: "Emma Wilson joined and made first investment",
+            amount: 50,
+            status: "Approved",
+            date: "2025-03-15",
+          },
+        ],
+      },
       notifications: [
         {
           id: "1",
@@ -573,6 +807,7 @@ export const useAppStore = create<AppState>()(
       setUser: (user) => set({ user }),
       setTheme: (theme) => set({ theme }),
       setCasks: (casks) => set({ casks }),
+      setOffers: (offers) => set({ offers }),
       addActivity: (activity) =>
         set((state) => ({
           activities: [activity, ...state.activities],
@@ -589,6 +824,10 @@ export const useAppStore = create<AppState>()(
         })),
       setForgotPasswordEmail: (email) => set({ forgotPasswordEmail: email }),
       setOtpVerified: (verified) => set({ otpVerified: verified }),
+      updateUserProfile: (updates) =>
+        set((state) => ({
+          user: state.user ? { ...state.user, ...updates } : null,
+        })),
       logout: () =>
         set({
           user: null,
@@ -600,7 +839,7 @@ export const useAppStore = create<AppState>()(
       name: "app-storage",
       storage: createJSONStorage(() => storage),
       version: 3, // INCREMENT THIS TO FORCE RESET
-      // ADD MIGRATION LOGIC
+      //ADD MIGRATION LOGIC
       migrate: (persistedState: any, version: number) => {
         console.log("Migrating from version:", version);
         // If stored data doesn't have all casks with new structure, use default
@@ -613,6 +852,7 @@ export const useAppStore = create<AppState>()(
           return {
             ...persistedState,
             casks: DEFAULT_CASKS,
+            offers: DEFAULT_OFFERS,
           };
         }
         return persistedState;
