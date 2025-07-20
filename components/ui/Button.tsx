@@ -10,8 +10,8 @@ interface ButtonProps {
   size?: "sm" | "md" | "lg";
   loading?: boolean;
   disabled?: boolean;
-  className?: string; // Applied to TouchableOpacity
-  textClassName?: string; // New prop for Text-specific classes
+  className?: string;
+  textClassName?: string;
 }
 
 export function Button({
@@ -85,8 +85,8 @@ export function Button({
           className={clsx(
             "font-manrope font-semibold",
             textColorStyles[variant],
-            textSizeStyles[size], // Apply size-based text styles
-            textClassName // Allow override via textClassName
+            textSizeStyles[size],
+            textClassName
           )}
         >
           {children}

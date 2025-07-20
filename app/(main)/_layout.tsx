@@ -174,7 +174,25 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='cask/[id]' // dynamic route
+        name='cask/[id]'
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name='express-interest/[id]'
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name='express-interest-success/[id]'
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name='offer-details/[id]'
         options={{
           href: null,
         }}
