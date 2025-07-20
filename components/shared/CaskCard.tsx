@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Eye, MapPin } from "lucide-react-native";
 // import { Shadow } from "react-native-shadow-2";
-// import { getCardShadow } from "@/utils/shadows";
+import { getCardShadow } from "@/utils/shadows";
 
 interface CaskCardProps {
   id: string;
@@ -50,13 +50,8 @@ export function CaskCard({
             backgroundColor: "#FFFFFF",
             borderWidth: 1.5,
             borderColor: borderColor,
-            shadowColor: "#0000001A",
-            shadowOffset: { width: 0, height: 8 },
-            shadowOpacity: 0.1,
-            shadowRadius: 42,
-            elevation: 8,
           },
-          // getCardShadow("sm"),
+          getCardShadow("sm"),
         ]}
       >
         <View className="flex-row items-start">
