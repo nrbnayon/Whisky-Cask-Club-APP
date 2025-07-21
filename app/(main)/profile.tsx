@@ -125,7 +125,7 @@ export default function ProfileScreen() {
         </View>
 
         {/* Menu Items */}
-        <View className="mt-4 rounded-md p-4">
+        <View className="py-4">
           <ProfileMenuItem
             icon={User}
             title="Edit Profile"

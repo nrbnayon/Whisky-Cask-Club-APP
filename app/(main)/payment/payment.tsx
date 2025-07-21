@@ -193,10 +193,10 @@ export default function CashOutScreen() {
   };
 
   return (
-    <SafeAreaView className='flex-1 bg-gray-50'>
+    <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false} className='flex-1'>
         {/* Header */}
-        <View className='flex-row items-center p-5 bg-white'>
+        <View className='flex-row items-center p-5'>
           <TouchableOpacity onPress={handleGoBack} className='mr-2'>
             <ArrowLeft size={24} color='#374151' />
           </TouchableOpacity>

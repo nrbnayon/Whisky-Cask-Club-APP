@@ -163,7 +163,7 @@ export default function ExpressInterestScreen() {
     <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className='flex-row items-center px-5 pb-3'>
+        <View className='flex-row items-center p-5'>
           <TouchableOpacity
             onPress={() => router.navigate("/(main)/offers" as any)}
             className='mr-2'

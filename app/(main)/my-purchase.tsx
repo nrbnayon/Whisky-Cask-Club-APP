@@ -314,7 +314,7 @@ export default function MyPurchaseScreen() {
     <SafeAreaView className="flex-1 bg-surface">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className="flex-row items-center px-5 py-4">
+        <View className="flex-row items-center p-5">
           <TouchableOpacity onPress={handleGoBack} className="mr-2">
             <ArrowLeft size={24} color="#374151" />
           </TouchableOpacity>
