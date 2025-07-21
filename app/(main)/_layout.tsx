@@ -1,7 +1,7 @@
 // app\(main)\_layout.tsx
 import { Tabs } from "expo-router";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { Home, Gift, User } from "lucide-react-native";
+import { Chrome as Home, Gift, User } from "lucide-react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import CaskBottleIcon from "@/assets/images/cask-bottle.png";
 

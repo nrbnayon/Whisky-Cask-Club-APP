@@ -19,7 +19,7 @@ import {
   Milk,
   BottleWine,
   Wine,
-  AlertTriangle,
+  TriangleAlert as AlertTriangle,
 } from "lucide-react-native";
 import { useAppStore } from "@/store/useAppStore";
 import { getCardShadow } from "@/utils/shadows";
