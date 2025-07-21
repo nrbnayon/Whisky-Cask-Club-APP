@@ -3,17 +3,7 @@ import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Image, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
-import {
-  ArrowLeft,
-  MapPin,
-  Star,
-  Clock,
-  Trash2,
-  Milk,
-  BottleWine,
-  Wine,
-  AlertTriangle,
-} from "lucide-react-native";
+import { ArrowLeft, MapPin, Star, Clock, Trash2, Milk, BottleWine, Wine, TriangleAlert as AlertTriangle } from "lucide-react-native";
 import { useAppStore } from "@/store/useAppStore";
 import { getCardShadow } from "@/utils/shadows";
 import { showToast } from "@/utils/toast";
