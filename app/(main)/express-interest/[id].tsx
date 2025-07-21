@@ -160,85 +160,85 @@ export default function ExpressInterestScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface">
+    <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className="flex-row items-center px-5 pb-3">
+        <View className='flex-row items-center px-5 pb-3'>
           <TouchableOpacity
             onPress={() => router.navigate("/(main)/offers" as any)}
-            className="mr-2"
+            className='mr-2'
           >
-            <ArrowLeft size={24} color="#374151" />
+            <ArrowLeft size={24} color='#374151' />
           </TouchableOpacity>
-          <Text className="text-gray-800 text-xl font-medium">
+          <Text className='text-gray-800 text-xl font-medium'>
             Express Interest
           </Text>
         </View>
 
-        <View className="px-5">
+        <View className='px-5'>
           {/* Offer Image */}
           <View
-            className="bg-white rounded-md p-3"
+            className='bg-white rounded-md p-3'
             style={[{ marginBottom: 16 }, getCardShadow("sm")]}
           >
-            <View className="relative rounded-md overflow-hidden mb-1">
+            <View className='relative rounded-md overflow-hidden mb-1'>
               <Image
                 source={{ uri: offer.image }}
-                className="w-full h-64"
-                resizeMode="cover"
+                className='w-full h-64'
+                resizeMode='cover'
               />
 
               {/* Badge */}
               <View
                 className={`absolute top-4 left-4 ${getBadgeColor()} rounded-full px-3 py-1 flex-row items-center`}
               >
-                <Text className="text-white text-sm font-medium mr-1">
+                <Text className='text-white text-sm font-medium mr-1'>
                   {getBadgeIcon()}
                 </Text>
-                <Text className="text-white text-sm font-medium">
+                <Text className='text-white text-sm font-medium'>
                   {offer.badge ||
                     offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}
                 </Text>
               </View>
 
               {/* Days Left */}
-              <View className="absolute bottom-4 left-4 bg-red-500 bg-opacity-60 rounded-full px-3 py-1 flex-row items-center">
-                <Clock size={14} color="white" />
-                <Text className="text-white text-sm font-medium ml-1">
+              <View className='absolute bottom-4 left-4 bg-red-500 bg-opacity-60 rounded-full px-3 py-1 flex-row items-center'>
+                <Clock size={14} color='white' />
+                <Text className='text-white text-sm font-medium ml-1'>
                   {offer.daysLeft} Days left
                 </Text>
               </View>
             </View>
             {/* Offer Info */}
-            <View className="flex-row items-center justify-between my-2">
-              <View className="flex-row items-center">
-                <MapPin size={16} color="#9CA3AF" />
-                <Text className="text-gray-500 ml-1 mr-4">
+            <View className='flex-row items-center justify-between my-2'>
+              <View className='flex-row items-center'>
+                <MapPin size={16} color='#9CA3AF' />
+                <Text className='text-gray-500 ml-1 mr-4'>
                   {offer.location}
                 </Text>
               </View>
-              <View className="flex-row items-center">
-                <Star size={16} color="#FFD700" fill="#FFD700" />
-                <Text className="text-gray-600 ml-1">{offer.rating}</Text>
+              <View className='flex-row items-center'>
+                <Star size={16} color='#FFD700' fill='#FFD700' />
+                <Text className='text-gray-600 ml-1'>{offer.rating}</Text>
               </View>
             </View>
-            <View className="flex-row items-center justify-between">
+            <View className='flex-row items-center justify-between'>
               <Text
-                className="text-xl font-bold text-gray-800 flex-1 pr-2"
+                className='text-xl font-bold text-gray-800 flex-1 pr-2'
                 style={{ flexShrink: 1, flexGrow: 1 }}
               >
                 {offer.title}
               </Text>
-              <View className="items-end">
+              <View className='items-end'>
                 {offer.originalPrice &&
                   offer.currentPrice &&
                   offer.originalPrice !== offer.currentPrice && (
-                    <Text className="text-gray-400 text-sm line-through">
+                    <Text className='text-gray-400 text-sm line-through'>
                       ${offer.originalPrice}
                     </Text>
                   )}
 
-                <Text className="text-primary text-xl font-bold">
+                <Text className='text-primary text-xl font-bold'>
                   ${offer.currentPrice || offer.originalPrice}
                 </Text>
               </View>
@@ -247,85 +247,85 @@ export default function ExpressInterestScreen() {
 
           {/* Personal Information Section */}
           <View
-            className="bg-white rounded-md p-3"
+            className='bg-white rounded-md p-3'
             style={[{ marginBottom: 16 }, getCardShadow("sm")]}
           >
             <View>
-              <View className="flex-row items-center mb-4">
-                <User size={20} color="#374151" />
-                <Text className="text-gray-800 text-lg font-semibold ml-2">
+              <View className='flex-row items-center mb-4'>
+                <User size={20} color='#374151' />
+                <Text className='text-gray-800 text-lg font-semibold ml-2'>
                   Personal Information
                 </Text>
               </View>
 
               <View style={{ gap: 12 }}>
                 <View>
-                  <Text className="text-gray-700 font-medium mb-2">
+                  <Text className='text-gray-700 font-medium mb-2'>
                     Full Name
                   </Text>
                   <Controller
                     control={control}
-                    name="fullName"
+                    name='fullName'
                     render={({ field: { onChange, value } }) => (
                       <TextInput
                         value={value}
                         onChangeText={onChange}
-                        placeholder="James Wilson"
-                        className="bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800"
+                        placeholder='James Wilson'
+                        className='bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800'
                       />
                     )}
                   />
                   {errors.fullName && (
-                    <Text className="text-red-500 text-sm mt-1">
+                    <Text className='text-red-500 text-sm mt-1'>
                       {errors.fullName.message}
                     </Text>
                   )}
                 </View>
 
                 <View>
-                  <Text className="text-gray-700 font-medium mb-2">
+                  <Text className='text-gray-700 font-medium mb-2'>
                     Email Address
                   </Text>
                   <Controller
                     control={control}
-                    name="email"
+                    name='email'
                     render={({ field: { onChange, value } }) => (
                       <TextInput
                         value={value}
                         onChangeText={onChange}
-                        placeholder="james@gmail.com"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        className="bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800"
+                        placeholder='james@gmail.com'
+                        keyboardType='email-address'
+                        autoCapitalize='none'
+                        className='bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800'
                       />
                     )}
                   />
                   {errors.email && (
-                    <Text className="text-red-500 text-sm mt-1">
+                    <Text className='text-red-500 text-sm mt-1'>
                       {errors.email.message}
                     </Text>
                   )}
                 </View>
 
                 <View>
-                  <Text className="text-gray-700 font-medium mb-2">
+                  <Text className='text-gray-700 font-medium mb-2'>
                     Phone Number
                   </Text>
                   <Controller
                     control={control}
-                    name="phoneNumber"
+                    name='phoneNumber'
                     render={({ field: { onChange, value } }) => (
                       <TextInput
                         value={value}
                         onChangeText={onChange}
-                        placeholder="Enter phone number"
-                        keyboardType="phone-pad"
-                        className="bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800"
+                        placeholder='Enter phone number'
+                        keyboardType='phone-pad'
+                        className='bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800'
                       />
                     )}
                   />
                   {errors.phoneNumber && (
-                    <Text className="text-red-500 text-sm mt-1">
+                    <Text className='text-red-500 text-sm mt-1'>
                       {errors.phoneNumber.message}
                     </Text>
                   )}
@@ -336,50 +336,50 @@ export default function ExpressInterestScreen() {
 
           {/* Investment Details Section */}
           <View
-            className="bg-white rounded-md p-3"
+            className='bg-white rounded-md p-3'
             style={[{ marginBottom: 16 }, getCardShadow("sm")]}
           >
             <View>
-              <View className="flex-row items-center mb-4">
-                <CreditCard size={20} color="#374151" />
-                <Text className="text-gray-800 text-lg font-semibold ml-2">
+              <View className='flex-row items-center mb-4'>
+                <CreditCard size={20} color='#374151' />
+                <Text className='text-gray-800 text-lg font-semibold ml-2'>
                   Investment Details
                 </Text>
               </View>
 
-              <View className="space-y-4">
+              <View className='space-y-4'>
                 <View>
-                  <Text className="text-gray-700 font-medium mb-2">
+                  <Text className='text-gray-700 font-medium mb-2'>
                     Investment Amount
                   </Text>
                   <Controller
                     control={control}
-                    name="investmentAmount"
+                    name='investmentAmount'
                     render={({ field: { onChange, value } }) => (
                       <TextInput
                         value={value}
                         onChangeText={onChange}
-                        placeholder="Enter amount"
-                        keyboardType="numeric"
-                        className="bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800"
+                        placeholder='Enter amount'
+                        keyboardType='numeric'
+                        className='bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800'
                       />
                     )}
                   />
                   {errors.investmentAmount && (
-                    <Text className="text-red-500 text-sm mt-1">
+                    <Text className='text-red-500 text-sm mt-1'>
                       {errors.investmentAmount.message}
                     </Text>
                   )}
                 </View>
 
                 <View>
-                  <Text className="text-gray-700 font-medium my-3">
+                  <Text className='text-gray-700 font-medium my-3'>
                     Preferred Contact Method
                   </Text>
-                  <View className="flex-row" style={{ gap: 12 }}>
+                  <View className='flex-row' style={{ gap: 12 }}>
                     <Controller
                       control={control}
-                      name="preferredContactMethod"
+                      name='preferredContactMethod'
                       render={({ field: { onChange, value } }) => (
                         <>
                           <TouchableOpacity
@@ -441,7 +441,7 @@ export default function ExpressInterestScreen() {
                   </View>
                   {/* Contact method hint */}
                   {preferredContactMethod && (
-                    <Text className="text-gray-500 text-sm mt-2">
+                    <Text className='text-gray-500 text-sm mt-2'>
                       We&rsquo;ll contact you via{" "}
                       {preferredContactMethod === "email" ? "email" : "phone"}{" "}
                       for follow-up discussions.
@@ -453,14 +453,14 @@ export default function ExpressInterestScreen() {
           </View>
 
           {/* Terms and Conditions */}
-          <View className="mb-8">
+          <View className='mb-8'>
             <Controller
               control={control}
-              name="agreeToTerms"
+              name='agreeToTerms'
               render={({ field: { onChange, value } }) => (
                 <TouchableOpacity
                   onPress={() => onChange(!value)}
-                  className="flex-row items-start"
+                  className='flex-row items-center'
                 >
                   <View
                     className={`w-5 h-5 border-2 rounded mr-3 items-center justify-center ${
@@ -469,22 +469,24 @@ export default function ExpressInterestScreen() {
                         : "border-gray-300 bg-white"
                     }`}
                   >
-                    {value && <Text className="text-white text-xs">✓</Text>}
+                    {value && <Text className='text-white text-xs'>✓</Text>}
                   </View>
-                  <View className="flex-1">
-                    <Text className="text-gray-600 leading-5 -mt-0.5">
+                  <View className='flex-1'>
+                    <Text className='text-gray-600 leading-5'>
                       I agree to the{" "}
-                      <TouchableOpacity onPress={handlePrivacyPress}>
-                        <Text className="text-primary font-medium mt-0.5">
-                          Terms & Conditions
-                        </Text>
-                      </TouchableOpacity>{" "}
+                      <Text
+                        className='text-primary font-medium'
+                        onPress={handlePrivacyPress}
+                      >
+                        Terms & Conditions
+                      </Text>{" "}
                       and{" "}
-                      <TouchableOpacity onPress={handlePrivacyPress}>
-                        <Text className="text-primary font-medium mt-0.5">
-                          Privacy Policy
-                        </Text>
-                      </TouchableOpacity>
+                      <Text
+                        className='text-primary font-medium'
+                        onPress={handlePrivacyPress}
+                      >
+                        Privacy Policy
+                      </Text>
                       .
                     </Text>
                   </View>
@@ -492,7 +494,7 @@ export default function ExpressInterestScreen() {
               )}
             />
             {errors.agreeToTerms && (
-              <Text className="text-red-500 text-sm mt-2">
+              <Text className='text-red-500 text-sm mt-2'>
                 {errors.agreeToTerms.message}
               </Text>
             )}
@@ -506,7 +508,7 @@ export default function ExpressInterestScreen() {
               agreeToTerms && !isLoading ? "bg-primary" : "bg-gray-300"
             }`}
           >
-            <Text className="text-white text-lg font-semibold">
+            <Text className='text-white text-lg font-semibold'>
               {isLoading ? "Submitting..." : "Submit Expression of Interest"}
             </Text>
           </TouchableOpacity>

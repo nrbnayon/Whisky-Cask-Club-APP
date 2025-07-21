@@ -149,11 +149,11 @@ export default function OfferDetailsScreen() {
                 <View className='items-end'>
                   {offer.originalPrice !== offer.currentPrice && (
                     <Text className='text-gray-400 text-sm line-through'>
-                      {offer.originalPrice}
+                      ${offer.originalPrice}
                     </Text>
                   )}
                   <Text className='text-primary text-xl font-bold'>
-                    {offer.currentPrice}
+                    ${offer.currentPrice}
                   </Text>
                 </View>
               </View>

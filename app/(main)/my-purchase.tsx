@@ -170,7 +170,7 @@ export default function MyPurchaseScreen() {
           </TouchableOpacity>
 
           {/* Days Left */}
-          <View className="absolute bottom-4 left-4 bg-black bg-opacity-60 rounded-full px-3 py-1 flex-row items-center">
+          <View className="absolute bottom-4 left-4 bg-red-500 bg-opacity-60 rounded-full px-3 py-1 flex-row items-center">
             <Clock size={14} color="white" />
             <Text className="text-white text-sm font-medium ml-1">
               {purchase.daysLeft} Days left
@@ -243,14 +243,14 @@ export default function MyPurchaseScreen() {
                   </Text>
                 </View>
               )}
-              {purchase.expectedReturn && (
+              {/* {purchase.expectedReturn && (
                 <View className="flex-row justify-between">
                   <Text className="text-gray-600">Expected Return:</Text>
                   <Text className="text-green-600 font-medium">
                     {purchase.expectedReturn}
                   </Text>
                 </View>
-              )}
+              )} */}
             </View>
           )}
         </View>

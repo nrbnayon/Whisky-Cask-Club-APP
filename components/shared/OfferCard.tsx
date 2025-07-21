@@ -134,11 +134,11 @@ export function OfferCard({
           <View>
             {originalPrice !== currentPrice && (
               <Text className='text-sm text-gray-400 line-through'>
-                {originalPrice}
+                ${originalPrice}
               </Text>
             )}
             <Text className='text-xl font-bold text-primary'>
-              {currentPrice}
+              ${currentPrice}
             </Text>
           </View>
         </View>
