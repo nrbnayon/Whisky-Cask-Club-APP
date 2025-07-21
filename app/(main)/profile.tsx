@@ -9,6 +9,7 @@ import {
   FileText,
   LogOut,
   ChevronRight,
+  ShoppingCart,
 } from "lucide-react-native";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -129,6 +130,11 @@ export default function ProfileScreen() {
             icon={User}
             title='Edit Profile'
             onPress={() => router.push("/(main)/edit-profile" as any)}
+          />
+          <ProfileMenuItem
+            icon={ShoppingCart}
+            title='My Purchase'
+            onPress={() => router.push("/(main)/my-purchase" as any)}
           />
           <ProfileMenuItem
             icon={CreditCard}

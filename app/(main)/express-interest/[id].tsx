@@ -28,6 +28,7 @@ import { z } from "zod";
 import { useAppStore } from "@/store/useAppStore";
 import { showToast } from "@/utils/toast";
 import { getCardShadow } from "@/utils/shadows";
+import { generateId } from "@/utils/helpers";
 
 const expressInterestSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -45,7 +46,7 @@ type ExpressInterestFormData = z.infer<typeof expressInterestSchema>;
 export default function ExpressInterestScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const { offers, user } = useAppStore();
+  const { offers, user, addPurchase } = useAppStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const offer = offers.find((o) => o.id === id);
@@ -113,6 +114,24 @@ export default function ExpressInterestScreen() {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
+      // Add to purchases for tracking
+      const newPurchase = {
+        id: generateId(),
+        title: offer.title,
+        type: offer.type,
+        image: offer.image,
+        location: offer.location,
+        rating: offer.rating,
+        daysLeft: offer.daysLeft,
+        investmentAmount: `$${data.investmentAmount}`,
+        status: "Pending" as const,
+        submittedDate: new Date().toISOString().split('T')[0],
+        contactMethod: data.preferredContactMethod === "email" ? "Email" : "Phone",
+        expectedReturn: "+15-20%", // This could be calculated based on offer data
+        offerId: offer.id,
+      };
+      
+      addPurchase(newPurchase);
       // Navigate to success page with form data
       router.push({
         pathname: "/(main)/express-interest-success/[id]" as any,

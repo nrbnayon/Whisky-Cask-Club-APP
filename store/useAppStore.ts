@@ -146,6 +146,22 @@ interface RewardHistory {
   date: string;
 }
 
+interface Purchase {
+  id: string;
+  title: string;
+  type: "cask" | "bottle" | "experience";
+  image: string;
+  location: string;
+  rating: number;
+  daysLeft: number;
+  investmentAmount: string;
+  status: "Pending" | "Active" | "Completed" | "Cancelled";
+  submittedDate: string;
+  contactMethod?: string;
+  expectedReturn?: string;
+  offerId: string;
+}
+
 interface AppState {
   user: {
     id: string;
@@ -161,6 +177,7 @@ interface AppState {
   activities: Activity[];
   notifications: Notification[];
   offers: Offer[];
+  purchases: Purchase[];
   referralData: {
     totalReferrals: number;
     completedReferrals: number;
@@ -181,6 +198,9 @@ interface AppState {
   setTheme: (theme: AppState["theme"]) => void;
   setCasks: (casks: Cask[]) => void;
   setOffers: (offers: Offer[]) => void;
+  addPurchase: (purchase: Purchase) => void;
+  removePurchase: (id: string) => void;
+  updatePurchaseStatus: (id: string, status: Purchase["status"]) => void;
   addActivity: (activity: Activity) => void;
   addNotification: (notification: Notification) => void;
   markNotificationAsRead: (id: string) => void;
@@ -686,6 +706,40 @@ const DEFAULT_OFFERS: Offer[] = [
   },
 ];
 
+// DEFAULT PURCHASES DATA
+const DEFAULT_PURCHASES: Purchase[] = [
+  {
+    id: "1",
+    title: "Rare Macallan 30yr Cask",
+    type: "cask",
+    image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    investmentAmount: "$13K",
+    status: "Pending",
+    submittedDate: "2025-01-15",
+    contactMethod: "Email",
+    expectedReturn: "+15-20%",
+    offerId: "1",
+  },
+  {
+    id: "2",
+    title: "Rare Macallan 30yr Cask",
+    type: "cask",
+    image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
+    location: "New York, USA",
+    rating: 4.9,
+    daysLeft: 7,
+    investmentAmount: "$13K",
+    status: "Active",
+    submittedDate: "2025-01-10",
+    contactMethod: "Phone",
+    expectedReturn: "+15-20%",
+    offerId: "1",
+  },
+];
+
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
@@ -693,6 +747,7 @@ export const useAppStore = create<AppState>()(
       theme: "system",
       casks: DEFAULT_CASKS,
       offers: DEFAULT_OFFERS,
+      purchases: DEFAULT_PURCHASES,
       activities: [
         {
           id: "1",
@@ -808,6 +863,20 @@ export const useAppStore = create<AppState>()(
       setTheme: (theme) => set({ theme }),
       setCasks: (casks) => set({ casks }),
       setOffers: (offers) => set({ offers }),
+      addPurchase: (purchase) =>
+        set((state) => ({
+          purchases: [purchase, ...state.purchases],
+        })),
+      removePurchase: (id) =>
+        set((state) => ({
+          purchases: state.purchases.filter((p) => p.id !== id),
+        })),
+      updatePurchaseStatus: (id, status) =>
+        set((state) => ({
+          purchases: state.purchases.map((p) =>
+            p.id === id ? { ...p, status } : p
+          ),
+        })),
       addActivity: (activity) =>
         set((state) => ({
           activities: [activity, ...state.activities],
@@ -853,6 +922,7 @@ export const useAppStore = create<AppState>()(
             ...persistedState,
             casks: DEFAULT_CASKS,
             offers: DEFAULT_OFFERS,
+            purchases: DEFAULT_PURCHASES,
           };
         }
         return persistedState;
