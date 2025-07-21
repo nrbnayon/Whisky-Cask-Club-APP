@@ -9,6 +9,7 @@ import {
   FileText,
   LogOut,
   ChevronRight,
+  ShoppingCart,
 } from "lucide-react-native";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -39,11 +40,11 @@ export default function ProfileScreen() {
   }) => (
     <TouchableOpacity
       onPress={onPress}
-      className='flex-row items-center py-4 border-b border-gray-100'
+      className="flex-row items-center py-4 border-b border-gray-100"
     >
       <Icon size={24} color={iconColor} />
       <Text className={`flex-1 ml-4 text-lg ${textColor}`}>{title}</Text>
-      {showChevron && <ChevronRight size={20} color='#9CA3AF' />}
+      {showChevron && <ChevronRight size={20} color="#9CA3AF" />}
     </TouchableOpacity>
   );
 
@@ -51,33 +52,33 @@ export default function ProfileScreen() {
     <Modal
       visible={showLogoutModal}
       transparent
-      animationType='slide'
+      animationType="slide"
       onRequestClose={() => setShowLogoutModal(false)}
     >
-      <View className='flex-1 justify-end bg-black/50'>
-        <View className='bg-white rounded-t-3xl p-6'>
-          <View className='w-12 h-1 bg-gray-300 rounded-full self-center mb-6' />
+      <View className="flex-1 justify-end bg-black/50">
+        <View className="bg-white rounded-t-3xl p-6">
+          <View className="w-12 h-1 bg-gray-300 rounded-full self-center mb-6" />
 
-          <Text className='text-xl font-semibold text-gray-800 text-center mb-2'>
+          <Text className="text-xl font-semibold text-gray-800 text-center mb-2">
             Log Out
           </Text>
-          <Text className='text-gray-600 text-center mb-8'>
+          <Text className="text-gray-600 text-center mb-8">
             Are you sure you want to log out?
           </Text>
 
           <View style={{ gap: 12 }}>
             <TouchableOpacity
               onPress={handleLogout}
-              className='bg-primary rounded-md py-4 items-center'
+              className="bg-primary rounded-md py-4 items-center"
             >
-              <Text className='text-white font-semibold text-lg'>Log Out</Text>
+              <Text className="text-white font-semibold text-lg">Log Out</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => setShowLogoutModal(false)}
-              className='bg-gray-100 rounded-md py-4 items-center'
+              className="bg-gray-100 rounded-md py-4 items-center"
             >
-              <Text className='text-gray-700 font-semibold text-lg'>
+              <Text className="text-gray-700 font-semibold text-lg">
                 Cancel
               </Text>
             </TouchableOpacity>
@@ -88,64 +89,69 @@ export default function ProfileScreen() {
   );
 
   return (
-    <SafeAreaView className='flex-1 bg-surface'>
-      <View className='flex-1 p-5'>
+    <SafeAreaView className="flex-1 bg-surface">
+      <View className="flex-1 p-5">
         {/* Header */}
-        <View className='flex-row items-center mb-8'>
-          <Text className='text-gray-800 text-2xl font-semibold'>
+        <View className="flex-row items-center mb-8">
+          <Text className="text-gray-800 text-2xl font-semibold">
             My Profile
           </Text>
         </View>
 
         {/* Profile Info */}
-        <View className='py-4 flex-row items-center'>
-          <View className='relative'>
+        <View className="py-4 flex-row items-center">
+          <View className="relative">
             <Image
               source={{
                 uri:
                   user?.avatar ||
                   "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
               }}
-              className='w-16 h-16 rounded-full'
-              resizeMode='cover'
+              className="w-16 h-16 rounded-full"
+              resizeMode="cover"
             />
-            <View className='absolute -bottom-1 -right-1 w-6 h-6 bg-gray-400 rounded-full items-center justify-center'>
-              <View className='w-3 h-3 bg-white rounded-full' />
+            <View className="absolute -bottom-1 -right-1 w-6 h-6 bg-gray-400 rounded-full items-center justify-center">
+              <View className="w-3 h-3 bg-white rounded-full" />
             </View>
           </View>
-          <View className='ml-4 flex-1'>
-            <Text className='text-xl font-semibold text-gray-800 mb-1'>
+          <View className="ml-4 flex-1">
+            <Text className="text-xl font-semibold text-gray-800 mb-1">
               {user?.name || "John Max"}
             </Text>
-            <Text className='text-gray-600'>
+            <Text className="text-gray-600">
               Balance: ${user?.balance || 150}
             </Text>
           </View>
         </View>
 
         {/* Menu Items */}
-        <View className='mt-4 rounded-md p-4'>
+        <View className="mt-4 rounded-md p-4">
           <ProfileMenuItem
             icon={User}
-            title='Edit Profile'
+            title="Edit Profile"
             onPress={() => router.push("/(main)/edit-profile" as any)}
           />
           <ProfileMenuItem
+            icon={ShoppingCart}
+            title="My Purchase"
+            onPress={() => router.push("/(main)/my-purchase" as any)}
+          />
+          <ProfileMenuItem
             icon={CreditCard}
-            title='Payment'
+            title="Payment"
             onPress={() => router.push("/(main)/payment/payment" as any)}
           />
           <ProfileMenuItem
             icon={FileText}
-            title='Privacy Policy'
+            title="Privacy Policy"
             onPress={() => router.push("/(screen)/privacy-policy" as any)}
           />
           <ProfileMenuItem
             icon={LogOut}
-            title='Log Out'
+            title="Log Out"
             onPress={() => setShowLogoutModal(true)}
-            iconColor='#EF4444'
-            textColor='text-red-500'
+            iconColor="#EF4444"
+            textColor="text-red-500"
             showChevron={false}
           />
         </View>

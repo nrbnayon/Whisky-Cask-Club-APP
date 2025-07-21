@@ -60,7 +60,7 @@ export default function ReferralScreen() {
     reward: number;
   }) => (
     <View
-      className="bg-custom-green rounded-md p-4 mb-3 flex-row items-center justify-between "
+      className="bg-custom-green rounded-md p-4 mt-3 flex-row items-center justify-between "
       style={[{ backgroundColor: "#CCF0DC" }]}
     >
       <View className="flex-row items-center flex-1">
@@ -272,7 +272,7 @@ export default function ReferralScreen() {
             className="bg-white rounded-md p-4"
             style={[{ marginBottom: 16 }, getCardShadow("sm")]}
           >
-            <Text className="text-gray-800 text-lg font-semibold mb-4">
+            <Text className="text-gray-800 text-lg font-semibold">
               Referral Statistics
             </Text>
 

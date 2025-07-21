@@ -96,7 +96,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name='index'
+        name="index"
         options={{
           title: "Home",
           tabBarIcon: ({ color, size, focused }) => (
@@ -105,13 +105,13 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title='Home'
+              title="Home"
             />
           ),
         }}
       />
       <Tabs.Screen
-        name='portfolio'
+        name="portfolio"
         options={{
           title: "Portfolio",
           tabBarIcon: ({ color, size, focused }) => (
@@ -119,7 +119,7 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title='Portfolio'
+              title="Portfolio"
               isImage={true}
               imageSource={CaskBottleIcon}
             />
@@ -127,7 +127,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name='offers'
+        name="offers"
         options={{
           title: "Offers",
           tabBarIcon: ({ color, size, focused }) => (
@@ -136,13 +136,13 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title='Offers'
+              title="Offers"
             />
           ),
         }}
       />
       <Tabs.Screen
-        name='referral'
+        name="referral"
         options={{
           title: "Referral",
           tabBarIcon: ({ color, size, focused }) => (
@@ -150,16 +150,16 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title='Referral'
+              title="Referral"
               isFontAwesome={true}
-              fontAwesomeName='users'
+              fontAwesomeName="users"
               isOutline={true}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name='profile'
+        name="profile"
         options={{
           title: "Profile",
           tabBarIcon: ({ color, size, focused }) => (
@@ -168,51 +168,57 @@ export default function TabLayout() {
               color={color}
               size={size}
               focused={focused}
-              title='Profile'
+              title="Profile"
             />
           ),
         }}
       />
       <Tabs.Screen
-        name='cask/[id]'
+        name="my-purchase"
         options={{
           href: null,
         }}
       />
       <Tabs.Screen
-        name='express-interest/[id]'
+        name="cask/[id]"
         options={{
           href: null,
         }}
       />
       <Tabs.Screen
-        name='express-interest-success/[id]'
+        name="express-interest/[id]"
         options={{
           href: null,
         }}
       />
       <Tabs.Screen
-        name='offer-details/[id]'
+        name="express-interest-success/[id]"
         options={{
           href: null,
         }}
       />
       <Tabs.Screen
-        name='payment/payment'
+        name="offer-details/[id]"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="payment/payment"
         options={{
           headerShown: false,
           href: null,
         }}
       />
       <Tabs.Screen
-        name='payment/add-account-card'
+        name="payment/add-account-card"
         options={{
           headerShown: false,
           href: null,
         }}
       />
       <Tabs.Screen
-        name='edit-profile'
+        name="edit-profile"
         options={{
           headerShown: false,
           href: null,
