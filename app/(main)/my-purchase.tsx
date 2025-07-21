@@ -1,6 +1,6 @@
 // app/(main)/my-purchase.tsx
 import React, { useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Image, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import {
@@ -12,6 +12,7 @@ import {
   Milk,
   BottleWine,
   Wine,
+  AlertTriangle,
 } from "lucide-react-native";
 import { useAppStore } from "@/store/useAppStore";
 import { getCardShadow } from "@/utils/shadows";
@@ -21,25 +22,46 @@ export default function MyPurchaseScreen() {
   const router = useRouter();
   const { purchases, removePurchase } = useAppStore();
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedPurchaseId, setSelectedPurchaseId] = useState<string | null>(null);
 
   const handleGoBack = () => {
     router.navigate("/(main)/profile" as any);
   };
 
-  const handleDeletePurchase = async (purchaseId: string) => {
-    setDeletingId(purchaseId);
+  const handleDeletePress = (purchaseId: string) => {
+    setSelectedPurchaseId(purchaseId);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!selectedPurchaseId) return;
+    
+    setDeletingId(selectedPurchaseId);
+    setShowDeleteModal(false);
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
       
-      removePurchase(purchaseId);
+      removePurchase(selectedPurchaseId);
       showToast("success", "Removed", "Investment removed from your purchases");
     } catch (error) {
       console.error("Error removing purchase:", error);
       showToast("error", "Failed to remove", "Please try again later");
     } finally {
       setDeletingId(null);
+      setSelectedPurchaseId(null);
     }
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false);
+    setSelectedPurchaseId(null);
+  };
+
+  const handleCardTitlePress = (purchase: any) => {
+    // Navigate to offer details page
+    router.push(`/(main)/offer-details/${purchase.offerId}` as any);
   };
 
   const getBadgeColor = (type: string) => {
@@ -78,7 +100,7 @@ export default function MyPurchaseScreen() {
         };
       case "pending":
         return {
-          bg: "bg-primary",
+          bg: "bg-yellow-500",
           text: "text-white",
         };
       case "completed":
@@ -86,7 +108,7 @@ export default function MyPurchaseScreen() {
           bg: "bg-blue-500",
           text: "text-white",
         };
-      case "cancelled":
+      case "reject":
         return {
           bg: "bg-red-500",
           text: "text-white",
@@ -130,7 +152,7 @@ export default function MyPurchaseScreen() {
 
           {/* Delete Button */}
           <TouchableOpacity
-            onPress={() => handleDeletePurchase(purchase.id)}
+            onPress={() => handleDeletePress(purchase.id)}
             disabled={isDeleting}
             className="absolute top-4 right-4 w-10 h-10 bg-red-100 rounded-full items-center justify-center"
             style={{ opacity: isDeleting ? 0.5 : 1 }}
@@ -165,15 +187,21 @@ export default function MyPurchaseScreen() {
 
           {/* Title and Price */}
           <View className="flex-row items-start justify-between mb-4">
-            <Text
+            <TouchableOpacity 
+              onPress={() => handleCardTitlePress(purchase)}
+              className="flex-1 mr-2"
+            >
+              <Text
               className={`text-lg font-semibold flex-1 mr-2 ${
                 purchase.status.toLowerCase() === "active"
                   ? "text-green-600"
                   : "text-gray-800"
               }`}
+              numberOfLines={2}
             >
               {purchase.title}
-            </Text>
+              </Text>
+            </TouchableOpacity>
             <Text className="text-xl font-bold text-gray-800">
               {purchase.investmentAmount}
             </Text>
@@ -223,6 +251,57 @@ export default function MyPurchaseScreen() {
     );
   };
 
+  const DeleteConfirmationModal = () => (
+    <Modal
+      visible={showDeleteModal}
+      transparent
+      animationType="fade"
+      onRequestClose={handleCancelDelete}
+    >
+      <View className="flex-1 justify-center items-center bg-black/50 px-4">
+        <View className="bg-white rounded-2xl p-6 w-full max-w-sm">
+          {/* Warning Icon */}
+          <View className="items-center mb-4">
+            <View className="w-16 h-16 bg-red-100 rounded-full items-center justify-center">
+              <AlertTriangle size={32} color="#EF4444" />
+            </View>
+          </View>
+
+          {/* Title and Message */}
+          <Text className="text-xl font-bold text-gray-800 text-center mb-2">
+            Delete Investment
+          </Text>
+          <Text className="text-gray-600 text-center mb-6 leading-5">
+            Are you sure you want to remove this investment from your tracking? This action cannot be undone.
+          </Text>
+
+          {/* Action Buttons */}
+          <View style={{ gap: 12 }}>
+            <TouchableOpacity
+              onPress={handleConfirmDelete}
+              className="bg-red-500 rounded-md py-4 items-center"
+              disabled={!!deletingId}
+            >
+              <Text className="text-white font-semibold text-lg">
+                {deletingId ? "Removing..." : "Yes, Delete"}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={handleCancelDelete}
+              className="bg-gray-100 rounded-md py-4 items-center"
+              disabled={!!deletingId}
+            >
+              <Text className="text-gray-700 font-semibold text-lg">
+                Cancel
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+
   return (
     <SafeAreaView className="flex-1 bg-surface">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -249,7 +328,7 @@ export default function MyPurchaseScreen() {
               </Text>
               <Text className="text-sm text-gray-500">Active</Text>
             </View>
-            <View className="flex-1 bg-white rounded-md p-4 border border-blue-200">
+            <View className="flex-1 bg-white rounded-md p-4 border border-yellow-200">
               <Text className="text-2xl font-bold text-blue-600 mb-1">
                 {purchases.filter((p) => p.status.toLowerCase() === "pending").length}
               </Text>
@@ -283,6 +362,8 @@ export default function MyPurchaseScreen() {
           )}
         </View>
       </ScrollView>
+
+      <DeleteConfirmationModal />
     </SafeAreaView>
   );
 }

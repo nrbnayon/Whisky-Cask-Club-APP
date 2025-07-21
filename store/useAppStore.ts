@@ -155,7 +155,7 @@ interface Purchase {
   rating: number;
   daysLeft: number;
   investmentAmount: string;
-  status: "Pending" | "Active" | "Completed" | "Cancelled";
+  status: "Pending" | "Active" | "Completed" | "Reject";
   submittedDate: string;
   contactMethod?: string;
   expectedReturn?: string;

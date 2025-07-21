@@ -60,7 +60,7 @@ export const getInvestmentStatusColor = (status: string) => {
         text: 'text-white',
         border: 'border-blue-500',
       };
-    case 'cancelled':
+    case 'reject':
       return {
         bg: 'bg-red-500',
         text: 'text-white',
