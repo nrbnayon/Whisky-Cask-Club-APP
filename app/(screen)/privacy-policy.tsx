@@ -1,3 +1,4 @@
+// app\(screen)\privacy-policy.tsx
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -23,7 +24,7 @@ export default function PrivacyPolicyScreen() {
     <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className='flex-row items-center p-5 border-b border-gray-100'>
+        <View className='flex-row items-center px-5 py-2 border-b border-gray-100'>
           <TouchableOpacity onPress={() => router.back()} className='mr-2'>
             <ArrowLeft size={24} color='#374151' />
           </TouchableOpacity>

@@ -40,6 +40,7 @@ module.exports = {
           900: "#2c1810",
           dark: "#1a0f08",
         },
+        "custom-green": "#CCF0DC",
         // Navy colors
         navy: {
           DEFAULT: "#1e1b4b",

@@ -68,7 +68,7 @@ export default function NotificationsScreen() {
 
   return (
     <SafeAreaView className='flex-1 bg-surface'>
-      <View className='flex-1 p-5'>
+      <View className='flex-1 px-5'>
         {/* Header */}
         <View className='flex-row items-center border-b border-gray-100 pb-4 mb-6'>
           <TouchableOpacity onPress={() => router.back()} className='mr-2'>

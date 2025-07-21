@@ -31,7 +31,7 @@ export default function OfferDetailsScreen() {
     );
   }
 
-  const getBadgeColor = () => {
+   const getBadgeColor = () => {
     switch (offer.type) {
       case "cask":
         return "bg-primary";
@@ -73,7 +73,7 @@ export default function OfferDetailsScreen() {
     <SafeAreaView className='flex-1 bg-surface'>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className='flex-row items-center p-5'>
+        <View className='flex-row items-center px-5'>
           <TouchableOpacity
             onPress={() => router.navigate("/(main)/offers" as any)}
             className='mr-2'
@@ -85,7 +85,7 @@ export default function OfferDetailsScreen() {
           </Text>
         </View>
 
-        <View className='px-5 pb-4'>
+        <View className='px-5 py-4'>
           {/* Main Image */}
           <View
             className='bg-white rounded-md overflow-hidden'

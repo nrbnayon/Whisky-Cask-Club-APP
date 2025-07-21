@@ -73,7 +73,7 @@ export function OfferCard({
       className='bg-white rounded-md overflow-hidden'
       style={[
         {
-          marginBottom: 20,
+          marginBottom: 16,
         },
         getCardShadow("sm"),
       ]}
