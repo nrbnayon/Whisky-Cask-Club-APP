@@ -24,6 +24,7 @@ import {
 import { useAppStore } from "@/store/useAppStore";
 import { getCardShadow } from "@/utils/shadows";
 import { showToast } from "@/utils/toast";
+import { OfferStatsCard } from "@/components/shared/OfferStatsCard";
 
 export default function MyPurchaseScreen() {
   const router = useRouter();
@@ -323,31 +324,36 @@ export default function MyPurchaseScreen() {
 
         <View className="px-5">
           {/* Summary Stats */}
-          <View className="flex-row mb-6 gap-2">
-            <View className="flex-1 bg-white rounded-md p-4 border border-orange-200">
-              <Text className="text-2xl font-bold text-orange-600 mb-1">
-                {purchases.length}
-              </Text>
-              <Text className="text-sm text-gray-500">Total Investments</Text>
-            </View>
-            <View className="flex-1 bg-white rounded-md p-4 border border-green-200">
-              <Text className="text-2xl font-bold text-green-600 mb-1">
-                {
-                  purchases.filter((p) => p.status.toLowerCase() === "active")
-                    .length
-                }
-              </Text>
-              <Text className="text-sm text-gray-500">Active</Text>
-            </View>
-            <View className="flex-1 bg-white rounded-md p-4 border border-yellow-200">
-              <Text className="text-2xl font-bold text-blue-600 mb-1">
-                {
-                  purchases.filter((p) => p.status.toLowerCase() === "pending")
-                    .length
-                }
-              </Text>
-              <Text className="text-sm text-gray-500">Pending</Text>
-            </View>
+
+          {/* Stats Cards */}
+          <View style={{ flexDirection: "row", gap: 8, marginBottom: 24 }}>
+            <OfferStatsCard
+              value={purchases.length}
+              label="Total Investments"
+              backgroundColor="bg-orange-50"
+              borderColor="border-orange-200"
+              valueColor="text-orange-600"
+            />
+            <OfferStatsCard
+              value={
+                purchases.filter((p) => p.status.toLowerCase() === "active")
+                  .length
+              }
+              label="Active"
+              backgroundColor="bg-green-50"
+              borderColor="border-green-200"
+              valueColor="text-green-600"
+            />
+            <OfferStatsCard
+              value={
+                purchases.filter((p) => p.status.toLowerCase() === "pending")
+                  .length
+              }
+              label="Pending"
+              backgroundColor="bg-red-50"
+              borderColor="border-red-200"
+              valueColor="text-red-600"
+            />
           </View>
 
           {/* Purchases List */}

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 interface OfferStatsCardProps {
-  value: string;
+  value: string | number;
   label: string;
   valueColor?: string;
   backgroundColor?: string;
