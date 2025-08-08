@@ -22,8 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
-        "backgroundColor": "#F6FBFB",
-        "statusBarBackgroundColor": "#F6FBFB"
+        "backgroundColor": "#F6FBFB"
       },
       "package": "com.whiskycaskclub.app",
       "versionCode": 1
